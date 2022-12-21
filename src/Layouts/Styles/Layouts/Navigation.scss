@@ -1,0 +1,29 @@
+nav {
+    font-size: 1.2em;
+
+    margin: 0 0 3rem;
+
+    a {
+        color: darken($color, 5%);
+
+        position: relative;
+
+        &.active {
+            color: #FFF;
+        }
+
+        &:hover {
+            color: lighten($color, 15%);
+        }
+
+        &:active {
+            color: darken($color, 15%);
+
+            top: 1px;
+        }
+
+        &:not(:last-child) {
+            margin-right: 2em;
+        }
+    }
+}

@@ -1,0 +1,83 @@
+.article-tag {
+    color: darken($color, 10%);
+
+    border: 1px solid darken($color, 10%);
+    border-radius: 3px;
+
+    font-size: .8em;
+
+    padding: .3em;
+
+    user-select: none;
+
+    cursor: pointer;
+
+    position: relative;
+
+    &:hover {
+        color: lighten($color, 10%);
+    
+        border-color: lighten($color, 10%);
+    }
+
+    &:active {
+        color: darken($color, 25%);
+    
+        border-color: darken($color, 25%);
+        
+        top: 1px;
+    }
+}
+
+.article-date {
+    text-transform: uppercase;
+
+    color: lighten($color, 25%);
+}
+
+.article-code {
+    border-radius: 3px;
+
+    font-size: .8em;
+
+    background: darken($background, 2%);
+
+    pre {
+        overflow: hidden;
+        
+        padding: 4px !important;
+
+        background: none !important;
+
+        &::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $color;
+
+            border-radius: 3px;
+
+        }
+    }
+
+    position: relative;
+
+    img {
+        position: absolute;
+
+        bottom: 4px;
+        right: 4px;
+
+        border-radius: 3px;
+
+        width: 3em;
+        height: 3em;
+
+        transition: opacity 100ms ease;
+
+        &:hover {
+            opacity: .1;
+        }
+    }
+}

@@ -1,0 +1,27 @@
+header {
+    width: min-content;
+
+    font-size: 1.7em;
+
+    margin: 0 auto 3rem;
+
+    h1 {
+        width: max-content;
+    }
+
+    p {
+        margin: 0;
+
+        font-size: 0.8em;
+
+        user-select: none;
+
+        &:last-child {
+            text-align: right;
+        }
+    }
+
+    .dodge-the-cursor {
+        position: relative;
+    }
+}

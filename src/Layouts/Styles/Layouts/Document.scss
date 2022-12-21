@@ -1,0 +1,14 @@
+html, body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+
+    background: $background;
+
+    color: $foreground;
+
+    font-family: sans-serif;
+    font-size: 17px;
+}
