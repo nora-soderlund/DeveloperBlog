@@ -81,3 +81,46 @@
         }
     }
 }
+
+.article-images-3 {
+    width: 100%;
+
+    position: relative;
+
+    img {
+        position: absolute;
+
+        height: 60%;
+
+        top: 25%;
+
+        box-shadow: 0 0 5px #000;
+
+        border-radius: 5px;
+
+        &:nth-child(1) {
+            left: -5vw;
+
+            transform: rotateZ(-7deg);
+        }
+
+        &:nth-child(2) {
+            width: 100%;
+            height: auto;
+
+            top: 8%;
+
+            z-index: 1;
+        }
+
+        &:nth-child(3) {
+            right: -5vw;
+
+            transform: rotateZ(9deg);
+        }
+
+        &:hover {
+            z-index: 2;
+        }
+    }
+}
