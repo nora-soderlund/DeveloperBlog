@@ -1,0 +1,42 @@
+@keyframes shimmer {
+    0% {
+        background-position: -468px 0
+    }
+
+    100% {
+        background-position: 468px 0
+    }
+}
+
+.shimmer {
+    &::before {
+        content: 'Lorem ipsum; didum lip';
+
+        opacity: 0;
+
+        user-select: none;
+    }
+
+    max-width: max-content;
+
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: shimmer;
+    animation-timing-function: linear;
+
+    border-radius: 3px;
+
+    background: linear-gradient(to right, lighten($background, 5%) 8%, lighten($background, 10%) 18%, lighten($background, 5%) 33%);
+    background-size: 800px 104px;
+
+    .shimmer-content {
+        opacity: 0;
+
+        user-select: none;
+    }
+}
+
+.shimmer-group > * {
+    @extend .shimmer;
+}

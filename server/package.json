@@ -1,0 +1,17 @@
+{
+  "name": "react-developer-blog-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/App.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http": "^0.0.1-security",
+    "mysql": "^2.18.1",
+    "shiki": "^0.12.1"
+  }
+}
