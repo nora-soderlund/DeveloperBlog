@@ -20,6 +20,53 @@ export default class Article extends Component {
         }
     };
 
+    hash = undefined;
+
+    componentDidUpdate() {
+        const hash = window.location.hash.substring(1);
+
+        if(hash != this.hash) {
+            this.resetPreviousTab();
+
+            this.hash = hash;
+
+            if(hash.length != 0) {
+                const tabElement = document.querySelector(`.article-tab[href="#${hash}"]`);
+
+                if(tabElement != null) {
+                    tabElement.classList.add("active");
+
+                    const element = document.getElementById(hash);
+
+                    element.classList.add("active");
+                }
+            }
+            else {
+                const defaultElement = document.querySelector(".article-tab[default]");
+        
+                if(defaultElement) {
+                    defaultElement.classList.add("active");
+
+                    const element = document.getElementById(defaultElement.getAttribute("href").substring(1));
+
+                    element.classList.add("active");
+                }
+            }
+        }
+    };
+
+    resetPreviousTab() {
+        const previousElement = document.querySelector(".article-tab.active");
+   
+        if(previousElement) {
+            previousElement.classList.remove("active");
+
+            const element = document.getElementById(previousElement.getAttribute("href").substring(1));
+
+            element.classList.remove("active");
+        }
+    }
+
     render() {
         if(!this.state?.article) {
             return (
@@ -60,11 +107,13 @@ export default class Article extends Component {
 
                 <div dangerouslySetInnerHTML={{ __html: (this.props.compact)?(this.state.article.short):(this.state.article.content)}}></div>
 
-                {this.state.article.tags.map((tag) => (
-                    <Link to={`/tags/${tag.slug}`} key={tag.slug}>
-                        <span className="article-tag">{tag.text}</span>
-                    </Link>
-                ))}
+                <p>
+                    {this.state.article.tags.map((tag) => (
+                        <Link to={`/tags/${tag.slug}`} key={tag.slug}>
+                            <span className="article-tag">{tag.text}</span>
+                        </Link>
+                    ))}
+                </p>
             </article>
         );
     };

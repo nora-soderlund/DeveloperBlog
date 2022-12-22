@@ -1,5 +1,23 @@
 p {
     color: $color;
+
+    a {
+        $localColor: lighten($color, 25%);
+        
+        color: $localColor;
+
+        position: relative;
+
+        &:hover {
+            color: lighten($localColor, 25%);
+        }
+
+        &:active {
+            color: darken($localColor, 25%);
+
+            top: 1px;
+        }
+    }
 }
 
 h1 {

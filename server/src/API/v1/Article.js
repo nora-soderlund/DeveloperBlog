@@ -19,18 +19,24 @@ Server.register("GET", "/api/v1/article", async (request, response) => {
 
     const articleTags = await Database.queryAsync(`SELECT tag FROM article_tags WHERE article = ${Database.escape(article.id)}`);
 
-    const tags = await Database.queryAsync(`SELECT slug, text FROM tags WHERE (${articleTags.map((articleTag) => `id = ${Database.escape(articleTag.tag)}`).join(" OR ")})`);
+    let tags = [];
 
-    const matches = article.content.matchAll(/\{CODE (\d+)\}/g);
-    const codes = await Database.queryAsync(`SELECT id, language, code FROM codes WHERE (${Array.from(matches).map((match) => `id = ${Database.escape(match[1])}`).join(" OR ")})`);
+    if(articleTags.length)
+        tags = await Database.queryAsync(`SELECT slug, text FROM tags WHERE (${articleTags.map((articleTag) => `id = ${Database.escape(articleTag.tag)}`).join(" OR ")})`);
 
     let content = article.content;
 
-    codes.forEach((code) => {
-        const html = highlighter.codeToHtml(code.code, { lang: code.language });
+    const matches = Array.from(article.content.matchAll(/\{CODE (\d+)\}/g));
 
-        content = content.replaceAll(`{CODE ${code.id}}`, `<div class="article-code">${html}</div>`);
-    });
+    if(matches.length) {
+        const codes = await Database.queryAsync(`SELECT id, language, code FROM codes WHERE (${matches.map((match) => `id = ${Database.escape(match[1])}`).join(" OR ")})`);
+
+        codes.forEach((code) => {
+            const html = highlighter.codeToHtml(code.code, { lang: code.language });
+
+            content = content.replaceAll(`{CODE ${code.id}}`, `<div class="article-code">${html}</div>`);
+        });
+    }
 
     return {
         title: article.title,
