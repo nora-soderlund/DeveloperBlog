@@ -45,12 +45,12 @@ export default class Article extends Component {
                 <p contentEditable>If you're using the JavaScript API, Android SDK, iOS SDK, or the Embed API: then you must create a public API key and if you don't restrict it properly, you can end up with a massive bill from Google...</p>
 
                 <div className="article-images-3" style={{ height: "200px" }}>
-                    <img alt="" src="https://i.imgur.com/T2wJoYC.png"/>
-                    <img alt="" src="https://i.imgur.com/fsQufhF.png"/>
-                    <img alt="" src="https://i.imgur.com/5rnT0Ov.png"/>
+                    <img alt="" src="https://i.imgur.com/R2yEF9E.png"/>
+                    <img alt="" src="https://i.imgur.com/rkfCpWA.png"/>
+                    <img alt="" src="https://i.imgur.com/5jnvguH.png"/>
                 </div>
 
-                <p contentEditable>edit</p>
+                <p contentEditable>With that said, you should always restrict your API keys properly, whether it's public or not. The Google Maps documentation has great coverage on restricting keys but the Google Cloud console can be a bit frightening to use, so I will do my best to guide you through the most common case uses!</p>
 
                 <div className="article-code">
                     <SyntaxHighlighter language="javascript" style={vs2015} showLineNumbers={false} lineNumberContainerStyle={false}>
