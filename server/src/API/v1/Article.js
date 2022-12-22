@@ -5,7 +5,7 @@ import shiki from "shiki";
 
 let highlighter = null;
 
-shiki.getHighlighter({}).then((_highlighter) => {
+shiki.getHighlighter({ theme: "github-dark" }).then((_highlighter) => {
     highlighter = _highlighter;
 });
 

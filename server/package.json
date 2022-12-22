@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/App.js"
+    "start": "node src/App.js",
+    "dev": "nodemon src/App.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +14,8 @@
     "http": "^0.0.1-security",
     "mysql": "^2.18.1",
     "shiki": "^0.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
