@@ -29,7 +29,7 @@ Server.register("GET", "/api/v1/article", async (request, response) => {
     codes.forEach((code) => {
         const html = highlighter.codeToHtml(code.code, { lang: code.language });
 
-        content = content.replace(`{CODE ${code.id}}`, `<div class="article-code">${html}</div>`);
+        content = content.replaceAll(`{CODE ${code.id}}`, `<div class="article-code">${html}</div>`);
     });
 
     return {
