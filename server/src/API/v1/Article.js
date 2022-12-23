@@ -10,6 +10,7 @@ shiki.getHighlighter({ theme: "github-dark" }).then((_highlighter) => {
 });
 
 Server.register("GET", "/api/v1/article", async (request, response) => {
+    const compact = request.server.url.searchParams.get("compact");
     const slug = request.server.url.searchParams.get("slug");
 
     const article = await Database.querySingleAsync(`SELECT id, title, short, content, timestamp FROM articles WHERE slug = ${Database.escape(slug)}`);
@@ -38,10 +39,19 @@ Server.register("GET", "/api/v1/article", async (request, response) => {
         });
     }
 
+    let feedback = null;
+
+    if(!compact) {
+        const user = request.socket.remoteAddress;
+
+        feedback = await Database.querySingleAsync(`SELECT positive FROM article_feedback WHERE article = ${Database.escape(article.id)} AND user = ${Database.escape(user)}`);
+    }
+
     return {
         title: article.title,
         short: article.short,
-        content: content,
+        content,
+        feedback,
 
         timestamp: article.timestamp,
 

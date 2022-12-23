@@ -63,7 +63,13 @@ export default class Article extends Component {
 
             element.classList.remove("active");
         }
-    }
+    };
+
+    onFeedbackClick(positive) {
+        fetch(`http://localhost:3001/api/v1/article/feedback?slug=${this.props.slug}&positive=${positive}`)
+            .then((response) => response.json())
+            .then((result) => this.setState({ article: { ...this.state.article, feedback: result } }));
+    };
 
     render() {
         if(!this.state?.article) {
@@ -118,12 +124,12 @@ export default class Article extends Component {
                         <p>Was this article useful for you?</p>
 
                         <div className="article-feedback-buttons">
-                            <div className="article-feedback-button">
-                                <FontAwesomeIcon icon={["far", "thumbs-up"]}/>
+                            <div className="article-feedback-button" onClick={() => this.onFeedbackClick(true)}>
+                                <FontAwesomeIcon icon={[(this.state.article.feedback && this.state.article.feedback.positive)?("fas"):("far"), "thumbs-up"]}/>
                             </div>
 
-                            <div className="article-feedback-button">
-                                <FontAwesomeIcon icon={["far", "thumbs-down"]}/>
+                            <div className="article-feedback-button" onClick={() => this.onFeedbackClick(false)}>
+                                <FontAwesomeIcon icon={[(this.state.article.feedback && !this.state.article.feedback.positive)?("fas"):("far"), "thumbs-down"]}/>
                             </div>
                         </div>
                     </div>

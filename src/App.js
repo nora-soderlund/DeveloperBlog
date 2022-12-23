@@ -2,7 +2,8 @@ import { Component } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faThumbsUp, faThumbsDown } from "@fortawesome/free-regular-svg-icons";
+import { faThumbsUp as farThumbsUp, faThumbsDown as farThumbsDown } from "@fortawesome/free-regular-svg-icons";
+import { faThumbsUp as fasThumbsUp, faThumbsDown as fasThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
 import Header from "./Layouts/Header";
 
@@ -15,7 +16,8 @@ import "./Layouts/Styles/App.scss";
 
 export default class App extends Component {
     componentDidMount() {
-        library.add(faThumbsUp, faThumbsDown);
+        library.add(farThumbsUp, farThumbsDown);
+        library.add(fasThumbsUp, fasThumbsDown);
     };
     
     render() {
