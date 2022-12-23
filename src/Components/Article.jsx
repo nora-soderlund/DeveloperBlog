@@ -1,9 +1,7 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-import javascript from "./../Images/javascript.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class Article extends Component {
     static months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
@@ -114,6 +112,22 @@ export default class Article extends Component {
                         </Link>
                     ))}
                 </p>
+
+                {(!this.props.compact) && (
+                    <div className="article-feedback">
+                        <p>Was this article useful for you?</p>
+
+                        <div className="article-feedback-buttons">
+                            <div className="article-feedback-button">
+                                <FontAwesomeIcon icon={["far", "thumbs-up"]}/>
+                            </div>
+
+                            <div className="article-feedback-button">
+                                <FontAwesomeIcon icon={["far", "thumbs-down"]}/>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </article>
         );
     };

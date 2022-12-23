@@ -196,3 +196,39 @@ article {
         }
     }
 }
+
+.article-feedback {
+    margin: 3em 0;
+
+    text-align: center;
+
+    user-select: none;
+
+    .article-feedback-buttons {
+        display: flex;
+    
+        justify-content: center;
+        align-items: center;
+        
+        gap: 1em;
+
+        .article-feedback-button {
+            font-size: 2em;
+
+            color: $color;
+
+            width: 2em;
+            height: 2em;
+
+            cursor: pointer;
+
+            &:hover {
+                color: lighten($color, 25%);
+            }
+
+            &:active {
+                color: darken($color, 25%);
+            }
+        }
+    }
+}
