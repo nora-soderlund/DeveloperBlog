@@ -27,6 +27,11 @@ export default class Database {
     };
 
     static async querySingleAsync(query) {
-        return (await this.queryAsync(query))[0];
+        const result = await this.queryAsync(query);
+
+        if(!result.length)
+            return null;
+
+        return result[0];
     };
 };

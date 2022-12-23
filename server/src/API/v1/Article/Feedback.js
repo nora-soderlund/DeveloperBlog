@@ -12,12 +12,14 @@ Server.register("GET", "/api/v1/article/feedback", async (request, response) => 
 
     const user = request.socket.remoteAddress;
 
-    const existing = await Database.querySingleAsync(`SELECT id FROM article_feedback WHERE article = ${Database.escape(article.id)} AND user = ${Database.escape(user)}`);
+    const existing = await Database.querySingleAsync(`SELECT id, positive FROM article_feedback WHERE article = ${Database.escape(article.id)} AND user = ${Database.escape(user)}`);
 
-    if(existing)
-        await Database.querySingleAsync(`UPDATE article_feedback SET positive = ${Database.escape(positive == "true")}, timestamp = ${Database.escape(Date.now())} WHERE id = ${Database.escape(existing.id)}`);
+    if(!existing)
+        await Database.querySingleAsync(`INSERT INTO article_feedback (article, user, positive, timestamp) VALUES (${Database.escape(article.id)}, ${Database.escape(user)}, ${Database.escape((positive == "true"))}, ${Database.escape(Date.now())})`);
+    else if(existing.positive == (positive == "true"))
+        await Database.querySingleAsync(`DELETE FROM article_feedback WHERE id = ${Database.escape(existing.id)}`);
     else
-        await Database.querySingleAsync(`INSERT INTO article_feedback (article, user, positive, timestamp) VALUES (${Database.escape(article.id)}, ${Database.escape(user)}, ${Database.escape((positive == "true")?(1):(-1))}, ${Database.escape(Date.now())})`);
+        await Database.querySingleAsync(`UPDATE article_feedback SET positive = ${Database.escape(positive == "true")}, timestamp = ${Database.escape(Date.now())} WHERE id = ${Database.escape(existing.id)}`);
 
     return await Database.querySingleAsync(`SELECT positive FROM article_feedback WHERE article = ${Database.escape(article.id)} AND user = ${Database.escape(user)}`);
 });
