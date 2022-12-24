@@ -2,7 +2,7 @@ import Server from "../../Server.js";
 import Database from "../../Database.js";
 
 Server.register("GET", "/api/v1/articles", async (request, response) => {
-    let query = "SELECT slug FROM articles ORDER BY timestamp DESC";
+    let query = "SELECT slug FROM articles WHERE hidden != 1 ORDER BY timestamp DESC";
 
     const tagsParams = request.server.url.searchParams.get("tags");
 
