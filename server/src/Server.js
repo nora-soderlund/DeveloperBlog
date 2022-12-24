@@ -6,12 +6,6 @@ export default class Server {
     static #server = http.createServer((request, response) => this.#onRequest(request, response));
 
     static async #onRequest(request, response) {
-        const headers = {
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-            "Access-Control-Allow-Methods": "*",
-            "Access-Control-Max-Age": 2592000
-        };
-
         try {
             request.server = {};
 
@@ -27,7 +21,7 @@ export default class Server {
                 return response.end();
             }
 
-            response.writeHead(200, "OK", headers);
+            response.writeHead(200, "OK");
 
             const result = await route.onRequest(request, response);
 
