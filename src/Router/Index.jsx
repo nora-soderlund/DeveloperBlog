@@ -7,7 +7,7 @@ export default class Index extends Component {
     componentDidMount() {
         document.title = App.title;
 
-        fetch("/api/v1/articles")
+        fetch(`${process.env.REACT_APP_API}/api/v1/articles`)
             .then((response) => response.json())
             .then((result) => this.setState({ articles: result }));
     };

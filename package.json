@@ -19,8 +19,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "set \"WDS_SOCKET_PORT=0\" && react-scripts build",
+    "start": "set \"REACT_APP_API=http://api.localhost\" && react-scripts start",
+    "build": "set \"WDS_SOCKET_PORT=0\" && set \"REACT_APP_API=\" && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
