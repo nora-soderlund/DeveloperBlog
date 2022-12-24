@@ -14,7 +14,7 @@ class TagsRouterComponent extends Component {
 
         document.title = App.title;
 
-        fetch(`http://localhost:3001/api/v1/articles?tags=${this.props.params.slug}`)
+        fetch(`/api/v1/articles?tags=${this.props.params.slug}`)
             .then((response) => response.json())
             .then((result) => this.setState({ articles: result }));
     };

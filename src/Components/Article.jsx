@@ -13,7 +13,7 @@ export default class Article extends Component {
 
     componentDidMount() {
         if(this.props?.slug) {
-            fetch(`http://localhost:3001/api/v1/article?slug=${this.props.slug}`)
+            fetch(`/api/v1/article?slug=${this.props.slug}`)
                 .then((response) => response.json())
                 .then((result) => this.setState({ article: result }));
         }
@@ -70,7 +70,7 @@ export default class Article extends Component {
     };
 
     onFeedbackClick(positive) {
-        fetch(`http://localhost:3001/api/v1/article/feedback?slug=${this.props.slug}&positive=${positive}`)
+        fetch(`/api/v1/article/feedback?slug=${this.props.slug}&positive=${positive}`)
             .then((response) => response.json())
             .then((result) => this.setState({ article: { ...this.state.article, feedback: result } }));
     };
