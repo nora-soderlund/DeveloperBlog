@@ -229,3 +229,20 @@ article {
         }
     }
 }
+
+.article-title {
+    .article-link {
+        margin-left: .2em;
+
+        opacity: 0;
+
+        cursor: pointer;
+    }
+
+    &:hover {
+        .article-link {
+            opacity: 1;
+        }
+    }
+}
+

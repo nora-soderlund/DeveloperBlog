@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import App from "../App";
 
 export default class Article extends Component {
     static months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
@@ -20,7 +21,10 @@ export default class Article extends Component {
 
     hash = undefined;
 
-    componentDidUpdate() {
+    componentDidUpdate(previousProps, previousState) {
+        if(previousState?.article != this.state?.article && this.props?.onData)
+            this.props.onData(this.state.article);
+
         const hash = window.location.hash.substring(1);
 
         if(hash != this.hash) {
@@ -103,10 +107,14 @@ export default class Article extends Component {
 
                 {(this.props?.compact)?(
                     <Link to={`/articles/${this.props.slug}`}>
-                        <h2>{this.state.article.title}</h2>
+                        <h2 className="article-title">{this.state.article.title}</h2>
                     </Link>
                 ):(
-                    <h2>{this.state.article.title}</h2>
+                    <h2 className="article-title">
+                        {this.state.article.title}
+
+                        <FontAwesomeIcon className="article-link" icon={["fas", "link"]} onClick={() => App.copyToClipboard(window.location.href.replace(window.location.hash, ""))}/>
+                    </h2>
                 )}
 
                 <div dangerouslySetInnerHTML={{ __html: (this.props.compact)?(this.state.article.short):(this.state.article.content)}}></div>

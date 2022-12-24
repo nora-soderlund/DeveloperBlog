@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { useParams } from "react-router";
+import App from "../App";
 
 import Article from "../Components/Article";
 
@@ -10,6 +11,8 @@ class TagsRouterComponent extends Component {
 
             return;
         }
+
+        document.title = App.title;
 
         fetch(`http://localhost:3001/api/v1/articles?tags=${this.props.params.slug}`)
             .then((response) => response.json())

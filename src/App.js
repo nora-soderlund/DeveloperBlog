@@ -3,7 +3,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faThumbsUp as farThumbsUp, faThumbsDown as farThumbsDown } from "@fortawesome/free-regular-svg-icons";
-import { faThumbsUp as fasThumbsUp, faThumbsDown as fasThumbsDown } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp as fasThumbsUp, faThumbsDown as fasThumbsDown, faLink as fasLink } from "@fortawesome/free-solid-svg-icons";
 
 import Header from "./Layouts/Header";
 
@@ -15,9 +15,19 @@ import TagsRouter from "./Router/Tags";
 import "./Layouts/Styles/App.scss";
 
 export default class App extends Component {
+    static title = document.title;
+
+    static async copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Copied link to clipboard!");
+        }, (error) => {
+            alert("Couldn't copy to clipboard: " + error);
+        });
+    };
+
     componentDidMount() {
         library.add(farThumbsUp, farThumbsDown);
-        library.add(fasThumbsUp, fasThumbsDown);
+        library.add(fasThumbsUp, fasThumbsDown, fasLink);
     };
     
     render() {
