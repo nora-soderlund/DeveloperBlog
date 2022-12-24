@@ -121,7 +121,11 @@ export default class Article extends Component {
 
                 {(!this.props.compact) && (
                     <div className="article-feedback">
-                        <p>Was this article useful for you?</p>
+                        {(!this.state.article.feedback)?(
+                            <p>Was this article useful for you?</p>
+                        ):(
+                            <p>Thank you for your feedback!</p>
+                        )}
 
                         <div className="article-feedback-buttons">
                             <div className="article-feedback-button" onClick={() => this.onFeedbackClick(true)}>
