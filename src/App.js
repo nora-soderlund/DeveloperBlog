@@ -15,7 +15,7 @@ import TagsRouter from "./Router/Tags";
 import "./Layouts/Styles/App.scss";
 
 export default class App extends Component {
-    static title = document.title;
+    static title = document.querySelector(`meta[name="title"]`).getAttribute("content");
 
     static async copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(() => {

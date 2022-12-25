@@ -12,7 +12,14 @@
         <meta name="keywords" content="Developer Blog, Nora Söderlund"/>
 
         <meta name="title" content="Nora Söderlund's Developer Blog"/>
-        <meta name="description" content="Articles written based of real life platform uses."/>
+        <meta name="description" content="${description}"/>
+
+        <meta property="og:title" content="${title}"/>
+        <meta property="og:description" content="${description}"/>
+        <meta property="og:url" content="${url}"/>
+        <meta property="og:image" content="%PUBLIC_URL%/images/favicon512.png"/>
+        
+        <meta property="og:${type}:published_time" content="${type_published_time}"/>
 
         <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/favicon192.png"/>
 
@@ -32,7 +39,7 @@
         Learn how to configure a non-root public URL by running `npm run build`.
         -->
 
-        <title>Nora Söderlund's Developer Blog</title>
+        <title>${title}</title>
     </head>
 
     <body>
