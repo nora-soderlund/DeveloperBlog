@@ -1,0 +1,15 @@
+.pagination {
+    color: $color;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    &:hover {
+        color: lighten($color, 25%);
+    }
+
+    &:active {
+        color: darken($color, 25%);
+    }
+}

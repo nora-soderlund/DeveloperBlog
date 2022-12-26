@@ -26,7 +26,7 @@ export default class Index extends Component {
                 ):(this.state.articles.map((slug) => (<Article key={slug} slug={slug} compact/>)))}
 
                 {(this.state?.paginatable) && (
-                    <p className="articles-paginate" onClick={() => this.onPaginate()}>Load more articles</p>
+                    <p className="pagination" onClick={() => this.onPaginate()}>Load more articles</p>
                 )}
             </div>
         );

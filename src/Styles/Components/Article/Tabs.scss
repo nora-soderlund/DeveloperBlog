@@ -1,0 +1,27 @@
+.article-tabs {
+    .article-tabs-header {
+        display: flex;
+
+        flex-direction: row;
+
+        gap: 2em;
+
+        .article-tab {
+            padding: 0 0 .4em;
+
+            &.active {
+                border-bottom: 2px solid $color;
+            }
+        }
+    }
+
+    .article-tabs-content {
+        .article-tab-content {
+            display: none;
+
+            &.active {
+                display: block;
+            }
+        }
+    }
+}

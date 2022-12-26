@@ -14,7 +14,7 @@ import About from "./Router/About";
 import ArticleRouter from "./Router/Article";
 import TagsRouter from "./Router/Tags";
 
-import "./Layouts/Styles/App.scss";
+import "./Styles/App.scss";
 
 library.add(farThumbsUp, farThumbsDown);
 library.add(fasThumbsUp, fasThumbsDown, fasLink);

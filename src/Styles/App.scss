@@ -6,7 +6,9 @@
 @import "Layouts/Document";
 @import "Layouts/Header";
 @import "Layouts/Navigation";
-@import "Layouts/Articles";
 
 @import "Layouts/Main";
 @import "Layouts/Footer";
+
+@import "Components/Article";
+@import "Components/Pagination";

@@ -1,0 +1,46 @@
+.article-tags {
+    display: flex;
+
+    gap: .5em;
+
+    .article-tag {
+        color: darken($color, 10%);
+
+        border: 1px solid darken($color, 10%);
+        border-radius: 4px;
+
+        font-size: .84em;
+
+        padding: .4em;
+
+        user-select: none;
+
+        cursor: pointer;
+
+        position: relative;
+
+        .article-tag-icon {
+            margin-right: .4em;
+        }
+
+        &.article-tag-featured {
+            @extend .shimmer;
+
+            &::before {
+                content: "";
+            }
+        }
+
+        &:hover {
+            color: lighten($color, 10%);
+        
+            border-color: lighten($color, 10%);
+        }
+
+        &:active {
+            color: darken($color, 25%);
+        
+            border-color: darken($color, 25%);
+        }
+    }
+}

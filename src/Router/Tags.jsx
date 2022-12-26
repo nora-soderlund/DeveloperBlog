@@ -35,7 +35,7 @@ class TagsRouterComponent extends Component {
                 )}
                 
                 {(this.state?.paginatable) && (
-                    <p className="articles-paginate" onClick={() => this.onPaginate()}>Load more articles</p>
+                    <p className="pagination" onClick={() => this.onPaginate()}>Load more articles</p>
                 )}
             </div>
         );

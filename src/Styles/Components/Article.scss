@@ -1,0 +1,31 @@
+article {
+    @import "Article/Tags";
+    @import "Article/Code";
+    @import "Article/Images";
+    @import "Article/Tabs";
+    @import "Article/Feedback";
+
+    margin-bottom: 3rem;
+
+    .article-title {
+        .article-link {
+            margin-left: .2em;
+    
+            opacity: 0;
+    
+            cursor: pointer;
+        }
+    
+        &:hover {
+            .article-link {
+                opacity: 1;
+            }
+        }
+    }
+
+    .article-date {
+        text-transform: uppercase;
+    
+        color: lighten($color, 25%);
+    }
+}

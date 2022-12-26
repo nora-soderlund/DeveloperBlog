@@ -1,0 +1,32 @@
+.article-feedback {
+    margin: 3em 0;
+
+    text-align: center;
+
+    user-select: none;
+
+    .article-feedback-buttons {
+        display: flex;
+    
+        justify-content: center;
+        align-items: center;
+        
+        .article-feedback-button {
+            font-size: 2em;
+
+            color: $color;
+
+            width: 2em;
+
+            cursor: pointer;
+
+            &:hover {
+                color: lighten($color, 25%);
+            }
+
+            &:active {
+                color: darken($color, 25%);
+            }
+        }
+    }
+}
