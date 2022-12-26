@@ -26,6 +26,19 @@
         &.article-tag-featured {
             @extend .shimmer;
 
+            border-color: #C44715;
+            color: #C44715;
+
+            &:hover {
+                border-color: lighten(#C44715, 15%);
+                color: lighten(#C44715, 15%);
+            }
+
+            &:active {
+                border-color: darken(#C44715, 15%);
+                color: darken(#C44715, 15%);
+            }
+
             &::before {
                 content: "";
             }
