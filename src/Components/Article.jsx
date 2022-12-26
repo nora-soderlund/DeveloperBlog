@@ -22,17 +22,17 @@ export default class Article extends Component {
     hash = undefined;
 
     componentDidUpdate(previousProps, previousState) {
-        if(previousState?.article != this.state?.article && this.props?.onData)
+        if(previousState?.article !== this.state?.article && this.props?.onData)
             this.props.onData(this.state.article);
 
         const hash = window.location.hash.substring(1);
 
-        if(hash != this.hash) {
+        if(hash !== this.hash) {
             this.resetPreviousTab();
 
             this.hash = hash;
 
-            if(hash.length != 0) {
+            if(hash.length !== 0) {
                 const tabElement = document.querySelector(`.article-tab[href="#${hash}"]`);
 
                 if(tabElement != null) {

@@ -4,8 +4,10 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faThumbsUp as farThumbsUp, faThumbsDown as farThumbsDown } from "@fortawesome/free-regular-svg-icons";
 import { faThumbsUp as fasThumbsUp, faThumbsDown as fasThumbsDown, faLink as fasLink } from "@fortawesome/free-solid-svg-icons";
+import { faGithub as fabGithub, faStackOverflow as fabStackOverflow, faLinkedin as fabLinkedin, faInstagram as fabInstagram } from "@fortawesome/free-brands-svg-icons";
 
 import Header from "./Layouts/Header";
+import Footer from "./Layouts/Footer";
 
 import Index from "./Router/Index";
 import About from "./Router/About";
@@ -13,6 +15,10 @@ import ArticleRouter from "./Router/Article";
 import TagsRouter from "./Router/Tags";
 
 import "./Layouts/Styles/App.scss";
+
+library.add(farThumbsUp, farThumbsDown);
+library.add(fasThumbsUp, fasThumbsDown, fasLink);
+library.add(fabGithub, fabStackOverflow, fabLinkedin, fabInstagram);
 
 export default class App extends Component {
     static title = document.querySelector(`meta[name="title"]`).getAttribute("content");
@@ -23,11 +29,6 @@ export default class App extends Component {
         }, (error) => {
             alert("Couldn't copy to clipboard: " + error);
         });
-    };
-
-    componentDidMount() {
-        library.add(farThumbsUp, farThumbsDown);
-        library.add(fasThumbsUp, fasThumbsDown, fasLink);
     };
     
     render() {
@@ -52,6 +53,8 @@ export default class App extends Component {
                         </Route>
                     </Routes>
                 </main>
+
+                <Footer/>
             </BrowserRouter>
         );
     };
