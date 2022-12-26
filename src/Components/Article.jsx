@@ -119,7 +119,7 @@ export default class Article extends Component {
 
                 <div dangerouslySetInnerHTML={{ __html: (this.props.compact)?(this.state.article.short):(this.state.article.content)}}></div>
 
-                <p>
+                <p className="article-tags">
                     {this.state.article.tags.map((tag) => (
                         <Link to={`/tags/${tag.slug}`} key={tag.slug}>
                             <span className="article-tag">{tag.text}</span>
