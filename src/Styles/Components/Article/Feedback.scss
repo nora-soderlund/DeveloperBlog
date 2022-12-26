@@ -5,6 +5,10 @@
 
     user-select: none;
 
+    @media print {
+        display: none;
+    }
+
     .article-feedback-buttons {
         display: flex;
     

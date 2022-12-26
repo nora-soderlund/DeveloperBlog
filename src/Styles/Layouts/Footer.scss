@@ -12,12 +12,24 @@ footer {
 
         font-size: 1.5em;
 
+        @media print {
+            justify-content: space-between;
+
+            margin-top: 1em;
+        }
+
         a {
             &:hover {
                 color: lighten($color, 25%);
             }
 
             transition: color 50ms ease-in-out;
+
+            .print-only {
+                margin-left: .5rem;
+
+                font-size: 1rem;
+            }
 
             &:active {
                 color: darken($color, 25%);

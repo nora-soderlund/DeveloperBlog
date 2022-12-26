@@ -5,6 +5,10 @@ body {
 
 p {
     color: $color;
+    
+    @media print {
+        break-inside: avoid;
+    }
 
     a {
         $localColor: lighten($color, 25%);
