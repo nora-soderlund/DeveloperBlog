@@ -17,8 +17,22 @@ footer {
                 color: lighten($color, 25%);
             }
 
+            transition: color 50ms ease-in-out;
+
             &:active {
                 color: darken($color, 25%);
+            }
+
+            &.footer-link-linkedin:hover {
+                color: #0077B5;
+            }
+
+            &.footer-link-github:hover {
+                color: #FFF;
+            }
+
+            &.footer-link-stack-overflow:hover {
+                color: #F48024;
             }
         }
     }
