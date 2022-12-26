@@ -14,9 +14,15 @@ class TagsRouterComponent extends Component {
 
         document.title = App.title;
 
-        fetch(`${process.env.REACT_APP_API ?? ""}/api/v1/articles?tags=${this.props.params.slug}`)
+        fetch(`${process.env.REACT_APP_API ?? ""}/api/v1/articles?tags=${this.props.params.slug}&start=${this.state?.start ?? 0}`)
             .then((response) => response.json())
-            .then((result) => this.setState({ articles: result }));
+            .then((result) => this.setState({ start: result.end, articles: result.articles, paginatable: result.paginatable }));
+    };
+
+    onPaginate() {
+        fetch(`${process.env.REACT_APP_API ?? ""}/api/v1/articles?start=${this.state?.start ?? 0}`)
+            .then((response) => response.json())
+            .then((result) => this.setState({ start: result.end, articles: this.state.articles.concat(result.articles), paginatable: result.paginatable }));
     };
 
     render() {
@@ -26,6 +32,10 @@ class TagsRouterComponent extends Component {
                     <Article compact/>
                 ):(
                     this.state.articles.map((slug) => (<Article key={slug} slug={slug} compact/>))
+                )}
+                
+                {(this.state?.paginatable) && (
+                    <p className="articles-paginate" onClick={() => this.onPaginate()}>Load more articles</p>
                 )}
             </div>
         );
