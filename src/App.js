@@ -4,7 +4,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faThumbsUp as farThumbsUp, faThumbsDown as farThumbsDown } from "@fortawesome/free-regular-svg-icons";
 import { faThumbsUp as fasThumbsUp, faThumbsDown as fasThumbsDown, faLink as fasLink } from "@fortawesome/free-solid-svg-icons";
-import { faGithub as fabGithub, faStackOverflow as fabStackOverflow, faLinkedin as fabLinkedin, faInstagram as fabInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faGithub as fabGithub, faStackOverflow as fabStackOverflow, faLinkedin as fabLinkedin, faInstagram as fabInstagram, faGoogle as fabGoogle } from "@fortawesome/free-brands-svg-icons";
 
 import Header from "./Layouts/Header";
 import Footer from "./Layouts/Footer";
@@ -18,7 +18,7 @@ import "./Layouts/Styles/App.scss";
 
 library.add(farThumbsUp, farThumbsDown);
 library.add(fasThumbsUp, fasThumbsDown, fasLink);
-library.add(fabGithub, fabStackOverflow, fabLinkedin, fabInstagram);
+library.add(fabGithub, fabStackOverflow, fabLinkedin, fabInstagram, fabGoogle);
 
 export default class App extends Component {
     static title = document.querySelector(`meta[name="title"]`).getAttribute("content");

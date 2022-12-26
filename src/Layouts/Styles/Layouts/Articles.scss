@@ -39,6 +39,10 @@ article {
 
         position: relative;
 
+        .article-tag-icon {
+            margin-right: .4em;
+        }
+
         &.article-tag-featured {
             @extend .shimmer;
 
