@@ -23,6 +23,14 @@ article {
 
         position: relative;
 
+        &.article-tag-featured {
+            @extend .shimmer;
+
+            &::before {
+                content: "";
+            }
+        }
+
         &:hover {
             color: lighten($color, 10%);
         
