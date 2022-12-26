@@ -2,6 +2,22 @@ article {
     margin-bottom: 3rem;
 }
 
+.articles-paginate {
+    color: $color;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    &:hover {
+        color: lighten($color, 25%);
+    }
+
+    &:active {
+        color: darken($color, 25%);
+    }
+}
+
 .article-tags {
     display: flex;
 
