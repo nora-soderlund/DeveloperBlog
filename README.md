@@ -2,6 +2,10 @@
 A simplistic developer blog written in React with SEO integration.
 
 ## Get started
+### Prerequisities
+- [Developer Blog Server](https://github.com/nora-soderlund/DeveloperBlogServer#get_started)
+
+### Instructions
 1. Clone the repository
 ```bat
 git clone https://github.com/nora-soderlund/DeveloperBlog
@@ -22,9 +26,7 @@ npm install
         ```bat
         npm run build
         ```
-4. Set up the 
-
-
+        2. Copy the build directory to the server.
 
 ## Gallery
 ![nora-soderlund.se](https://user-images.githubusercontent.com/78360666/209617572-552ec67c-481e-46d5-a26e-8e830bbc7689.png)
