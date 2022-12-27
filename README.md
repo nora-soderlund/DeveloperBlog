@@ -16,7 +16,7 @@ npm install
 ```
 3. Start the project
     - Run in development environment:
-        1. Set the EACT_APP_API environment variable to the API domain.
+        1. Set the REACT_APP_API environment variable to the API domain.
         2. Run the start script:
         ```bat
         npm run start
