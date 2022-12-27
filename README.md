@@ -7,25 +7,25 @@ A simplistic developer blog written in React with SEO integration.
 
 ### Instructions
 1. Clone the repository
-```bat
-git clone https://github.com/nora-soderlund/DeveloperBlog
-```
+    ```bat
+    git clone https://github.com/nora-soderlund/DeveloperBlog
+    ```
 2. Install the packages.
-```bat
-npm install
-```
+    ```bat
+    npm install
+    ```
 3. Start the project
     - Run in development environment:
         1. Set the REACT_APP_API environment variable to the API domain.
         2. Run the start script:
-        ```bat
-        npm run start
-        ```
+            ```bat
+            npm run start
+            ```
     - Build static files for production
         1. Run the build script:
-        ```bat
-        npm run build
-        ```
+            ```bat
+            npm run build
+            ```
         2. Copy the build directory to the server.
 
 ## Gallery
