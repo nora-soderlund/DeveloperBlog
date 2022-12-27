@@ -109,10 +109,10 @@ export default class Article extends Component {
                         <h2 className="article-title">{article.title}</h2>
                     </Link>
                 ):(
-                    <h2 className="article-title">
+                    <h2 className="article-title article-title-link" onClick={() => App.copyToClipboard(window.location.href.replace(window.location.hash, ""))}>
                         {article.title}
 
-                        <FontAwesomeIcon className="article-link" icon={["fas", "link"]} onClick={() => App.copyToClipboard(window.location.href.replace(window.location.hash, ""))}/>
+                        <FontAwesomeIcon className="article-link" icon={["fas", "link"]}/>
                     </h2>
                 )}
 

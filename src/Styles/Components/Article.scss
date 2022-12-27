@@ -9,12 +9,14 @@ article {
     margin-bottom: 3rem;
 
     .article-title {
+        &.article-title-link {
+            cursor: pointer;
+        }
+
         .article-link {
             margin-left: .2em;
     
             opacity: 0;
-    
-            cursor: pointer;
         }
     
         &:hover {
