@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import App from "../App";
+import Articles from "../Services/API/Articles";
 
 export default class Article extends Component {
     static months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
@@ -13,9 +14,7 @@ export default class Article extends Component {
 
     componentDidMount() {
         if(this.props?.slug) {
-            fetch(`${process.env.REACT_APP_API ?? ""}/api/v1/article?slug=${this.props.slug}`)
-                .then((response) => response.json())
-                .then((result) => this.setState({ article: result }));
+            Articles.getAsync(this.props.slug).then((article) => this.setState({ article }));
         }
     };
 
@@ -76,7 +75,9 @@ export default class Article extends Component {
     };
 
     render() {
-        if(!this.state?.article) {
+        const article = this.state?.article ?? Articles.getCached(this.props.slug);
+
+        if(!article) {
             return (
                 <article>
                     <span className="article-date shimmer"></span>
@@ -96,10 +97,8 @@ export default class Article extends Component {
             );
         }
 
-        const date = new Date(this.state.article.timestamp);
+        const date = new Date(article.timestamp);
         const month = (Article.months)[date.getMonth()];
-
-        console.log(this.state.article);
 
         return (
             <article>
@@ -107,20 +106,20 @@ export default class Article extends Component {
 
                 {(this.props?.compact)?(
                     <Link to={`/articles/${this.props.slug}`}>
-                        <h2 className="article-title">{this.state.article.title}</h2>
+                        <h2 className="article-title">{article.title}</h2>
                     </Link>
                 ):(
                     <h2 className="article-title">
-                        {this.state.article.title}
+                        {article.title}
 
                         <FontAwesomeIcon className="article-link" icon={["fas", "link"]} onClick={() => App.copyToClipboard(window.location.href.replace(window.location.hash, ""))}/>
                     </h2>
                 )}
 
-                <div dangerouslySetInnerHTML={{ __html: (this.props.compact)?(this.state.article.short):(this.state.article.content)}}></div>
+                <div dangerouslySetInnerHTML={{ __html: (this.props.compact)?(article.short):(article.content)}}></div>
 
                 <p className="article-tags">
-                    {this.state.article.tags.map((tag) => (
+                    {article.tags.map((tag) => (
                         <Link to={`/tags/${tag.slug}`} key={tag.slug}>
                             <span className={`article-tag ${(tag.slug === "featured")?("article-tag-featured"):("")}`}>
                                 {(tag.icon) && (<FontAwesomeIcon className="article-tag-icon" icon={[ tag.icon.substring(0, tag.icon.indexOf('-')), tag.icon.substring(tag.icon.indexOf('-') + 1) ]}/>)}
@@ -133,7 +132,7 @@ export default class Article extends Component {
 
                 {(!this.props.compact) && (
                     <div className="article-feedback">
-                        {(!this.state.article.feedback)?(
+                        {(!article.feedback)?(
                             <p>Was this article useful for you?</p>
                         ):(
                             <p>Thank you for your feedback!</p>
@@ -141,11 +140,11 @@ export default class Article extends Component {
 
                         <div className="article-feedback-buttons">
                             <div className="article-feedback-button" onClick={() => this.onFeedbackClick(true)}>
-                                <FontAwesomeIcon icon={[(this.state.article.feedback && this.state.article.feedback.positive)?("fas"):("far"), "thumbs-up"]}/>
+                                <FontAwesomeIcon icon={[(article.feedback && article.feedback.positive)?("fas"):("far"), "thumbs-up"]}/>
                             </div>
 
                             <div className="article-feedback-button" onClick={() => this.onFeedbackClick(false)}>
-                                <FontAwesomeIcon icon={[(this.state.article.feedback && !this.state.article.feedback.positive)?("fas"):("far"), "thumbs-down"]}/>
+                                <FontAwesomeIcon icon={[(article.feedback && !article.feedback.positive)?("fas"):("far"), "thumbs-down"]}/>
                             </div>
                         </div>
                     </div>

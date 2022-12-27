@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import App from "../App";
 
 import Article from "../Components/Article";
+import Articles from "../Services/API/Articles";
 
 class TagsRouterComponent extends Component {
     componentDidMount() {
@@ -14,15 +15,13 @@ class TagsRouterComponent extends Component {
 
         document.title = App.title;
 
-        fetch(`${process.env.REACT_APP_API ?? ""}/api/v1/articles?tags=${this.props.params.slug}&start=${this.state?.start ?? 0}`)
-            .then((response) => response.json())
-            .then((result) => this.setState({ start: result.end, articles: result.articles, paginatable: result.paginatable }));
+        Articles.getFeedAsync(this.state?.start ?? 0, this.props.params.slug)
+            .then((feed) => this.setState({ start: feed.end, articles: feed.articles, paginatable: feed.paginatable }));
     };
 
     onPaginate() {
-        fetch(`${process.env.REACT_APP_API ?? ""}/api/v1/articles?start=${this.state?.start ?? 0}`)
-            .then((response) => response.json())
-            .then((result) => this.setState({ start: result.end, articles: this.state.articles.concat(result.articles), paginatable: result.paginatable }));
+        Articles.getFeedAsync(this.state?.start ?? 0, this.props.params.slug)
+            .then((feed) => this.setState({ start: feed.end, articles: this.state.articles.concat(feed.articles), paginatable: feed.paginatable }));
     };
 
     render() {

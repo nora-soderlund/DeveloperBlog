@@ -2,30 +2,31 @@ import { Component } from "react";
 import App from "../App";
 
 import Article from "../Components/Article";
+import Articles from "../Services/API/Articles";
 
 export default class Index extends Component {
     componentDidMount() {
         document.title = App.title;
 
-        fetch(`${process.env.REACT_APP_API ?? ""}/api/v1/articles?start=${this.state?.start ?? 0}`)
-            .then((response) => response.json())
-            .then((result) => this.setState({ start: result.end, articles: result.articles, paginatable: result.paginatable }));
+        Articles.getFeedAsync(this.state?.start ?? 0)
+            .then((feed) => this.setState({ feed }));
     };
 
     onPaginate() {
-        fetch(`${process.env.REACT_APP_API ?? ""}/api/v1/articles?start=${this.state?.start ?? 0}`)
-            .then((response) => response.json())
-            .then((result) => this.setState({ start: result.end, articles: this.state.articles.concat(result.articles), paginatable: result.paginatable }));
+        Articles.getFeedAsync(this.state?.start ?? 0)
+            .then((feed) => this.setState({ feed }));
     };
 
     render() {
+        const feed = this.state?.feed ?? Articles.getCachedFeed(this.state?.start ?? 0);
+
         return (
             <div>
-                {(!this.state || !this.state.articles)?(
+                {(!this.state || !feed.articles)?(
                     <Article compact/>
-                ):(this.state.articles.map((slug) => (<Article key={slug} slug={slug} compact/>)))}
+                ):(feed.articles.map((slug) => (<Article key={slug} slug={slug} compact/>)))}
 
-                {(this.state?.paginatable) && (
+                {(feed?.paginatable) && (
                     <p className="pagination" onClick={() => this.onPaginate()}>Load more articles</p>
                 )}
             </div>
