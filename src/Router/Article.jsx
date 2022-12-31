@@ -7,6 +7,8 @@ import Article from "../Components/Article";
 class ArticleRouterComponent extends Component {
     componentDidMount() {
         document.title = `${App.title}`;
+
+        window.scrollTo(window.scrollX, 0);
     };
 
     onData(article) {

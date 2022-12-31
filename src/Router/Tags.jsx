@@ -15,6 +15,8 @@ class TagsRouterComponent extends Component {
 
         document.title = App.title;
 
+        window.scrollTo(window.scrollX, 0);
+
         Articles.getFeedAsync(this.state?.start ?? 0, this.props.params.slug)
             .then((feed) => this.setState({ start: feed.end, articles: feed.articles, paginatable: feed.paginatable }));
     };

@@ -8,6 +8,8 @@ export default class Index extends Component {
     componentDidMount() {
         document.title = App.title;
 
+        window.scrollTo(window.scrollX, 0);
+
         Articles.getFeedAsync(this.state?.start ?? 0)
             .then((feed) => this.setState({ feed }));
     };
