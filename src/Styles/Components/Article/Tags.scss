@@ -26,34 +26,17 @@
         &.article-tag-featured {
             @extend .shimmer;
 
-            border-color: #C44715;
-            color: #C44715;
-
-            &:hover {
-                border-color: lighten(#C44715, 15%);
-                color: lighten(#C44715, 15%);
-            }
-
-            &:active {
-                border-color: darken(#C44715, 15%);
-                color: darken(#C44715, 15%);
-            }
-
             &::before {
                 content: "";
             }
         }
 
         &:hover {
-            color: lighten($color, 10%);
-        
-            border-color: lighten($color, 10%);
+            filter: brightness(115%);
         }
 
         &:active {
-            color: darken($color, 25%);
-        
-            border-color: darken($color, 25%);
+            filter: brightness(85%);
         }
     }
 }

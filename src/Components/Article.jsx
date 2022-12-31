@@ -121,7 +121,10 @@ export default class Article extends Component {
                 <p className="article-tags">
                     {article.tags.map((tag) => (
                         <Link to={`/tags/${tag.slug}`} key={tag.slug}>
-                            <span className={`article-tag ${(tag.slug === "featured")?("article-tag-featured"):("")}`}>
+                            <span className={`article-tag ${(tag.shimmer)?("article-tag-featured"):("")}`} style={tag.color && {
+                                color: tag.color,
+                                borderColor: tag.color
+                            }}>
                                 {(tag.icon) && (<FontAwesomeIcon className="article-tag-icon" icon={[ tag.icon.substring(0, tag.icon.indexOf('-')), tag.icon.substring(tag.icon.indexOf('-') + 1) ]}/>)}
                                 
                                 {tag.text}
