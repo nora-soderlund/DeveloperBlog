@@ -1,9 +1,19 @@
 .grid {
     display: grid;
+
+    width: 100%;
+
+    overflow: hidden;
 }
 
 .grid-horizontal-2 {
     grid-gap: .5em;
 
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, calc(50% - .25em));
+}
+
+.grid-vertical-2 {
+    grid-gap: .5em;
+
+    grid-template-rows: repeat(2, calc(50% - .25em));
 }
