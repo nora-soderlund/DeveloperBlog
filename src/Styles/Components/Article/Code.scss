@@ -1,12 +1,19 @@
 .article-code {
     border-radius: 6px;
 
+    font-family: "Fira Code", monospace;
     font-size: .8em;
 
     background: darken($background, 2%);
 
     pre {
         overflow: auto;
+
+        font-family: inherit;
+        
+        code {
+            font-family: inherit;
+        }
 
         &::-webkit-scrollbar {
             height: 4px;
