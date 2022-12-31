@@ -1,0 +1,9 @@
+.grid {
+    display: grid;
+}
+
+.grid-horizontal-2 {
+    grid-gap: .5em;
+
+    grid-template-columns: repeat(2, 1fr);
+}
