@@ -20,7 +20,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set \"REACT_APP_API=http://api.localhost\" && react-scripts start",
+    "start": "set \"REACT_APP_API=http://localhost:3001\" && react-scripts start",
     "build": "set \"WDS_SOCKET_PORT=0\" && set \"REACT_APP_API=\" && set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
