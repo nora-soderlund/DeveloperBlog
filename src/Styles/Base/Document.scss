@@ -3,11 +3,13 @@ html, body {
 }
 
 body {
-    margin: 0;
+    width: 100vw;
 
-    padding: 4rem 1rem 1rem;
+    overflow-x: hidden;
 
     background: $background;
-
     color: $foreground;
+
+    margin: 0;
+    padding: 0;
 }
