@@ -1,0 +1,15 @@
+.programmer-network {
+    color: #6366f1;
+
+    &:hover {
+        color: #6366f1;
+
+        filter: brightness(125%);
+    }
+
+    &:active {
+        color: #6366f1;
+
+        filter: brightness(75%);
+    }
+}

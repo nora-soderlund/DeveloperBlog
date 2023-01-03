@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import App from "../App";
 import Articles from "../Services/API/Articles";
+import ProgrammerNetworkLink from "./ProgrammerNetworkLink";
 
 export default class Article extends Component {
     static months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
@@ -118,20 +119,28 @@ export default class Article extends Component {
 
                 <div dangerouslySetInnerHTML={{ __html: (this.props.compact)?(article.short):(article.content)}}></div>
 
-                <p className="article-tags">
-                    {article.tags.map((tag) => (
-                        <Link to={`/tags/${tag.slug}`} key={tag.slug}>
-                            <span className={`article-tag ${(tag.shimmer)?("article-tag-featured"):("")}`} style={tag.color && {
-                                color: tag.color,
-                                borderColor: tag.color
-                            }}>
-                                {(tag.icon) && (<FontAwesomeIcon className="article-tag-icon" icon={[ tag.icon.substring(0, tag.icon.indexOf('-')), tag.icon.substring(tag.icon.indexOf('-') + 1) ]}/>)}
-                                
-                                {tag.text}
-                            </span>
-                        </Link>
-                    ))}
-                </p>
+                <div className="article-tags">
+                    <div className="article-tags-content">
+                        {article.tags.map((tag) => (
+                            <Link to={`/tags/${tag.slug}`} key={tag.slug}>
+                                <span className={`article-tag ${(tag.shimmer)?("article-tag-featured"):("")}`} style={tag.color && {
+                                    color: tag.color,
+                                    borderColor: tag.color
+                                }}>
+                                    {(tag.icon) && (<FontAwesomeIcon className="article-tag-icon" icon={[ tag.icon.substring(0, tag.icon.indexOf('-')), tag.icon.substring(tag.icon.indexOf('-') + 1) ]}/>)}
+                                    
+                                    {tag.text}
+                                </span>
+                            </Link>
+                        ))}
+                    </div>
+
+                    {(this.props.compact && article.network) && (
+                        <div className="article-tags-links">
+                            <ProgrammerNetworkLink href={article.network} text={null}/>
+                        </div>
+                    )}
+                </div>
 
                 {(!this.props.compact) && (
                     <div className="article-feedback">
@@ -151,6 +160,12 @@ export default class Article extends Component {
                             </div>
                         </div>
                     </div>
+                )}
+
+                {(!this.props.compact && article.network) && (
+                    <p className="article-network">
+                        Join the discussion on <ProgrammerNetworkLink href={article.network}/> with other developers!
+                    </p>
                 )}
             </article>
         );

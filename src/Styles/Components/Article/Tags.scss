@@ -1,7 +1,15 @@
 .article-tags {
     display: flex;
 
-    gap: .5em;
+    .article-tags-content {
+        display: flex;
+
+        gap: .5em;
+    }
+
+    .article-tags-links {
+        margin-left: auto;
+    }
 
     .article-tag {
         color: darken($color, 10%);
