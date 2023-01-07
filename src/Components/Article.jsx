@@ -5,11 +5,31 @@ import Link from "next/link";
 import Icons, { Icon, IconNames } from "./Icon";
 import ProgrammerNetworkLink from "./ProgrammerNetworkLink";
 
+import SyntaxHighlight from "./SyntaxHighlight";
+
 export default class Article extends Component {
     static months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 
     static getOrdinalNumber(number) {
         return number + (number > 0 ? ['th', 'st', 'nd', 'rd'][(number > 3 && number < 21) || number % 10 > 3 ? 0 : number % 10] : '');
+    };
+
+    componentDidUpdate() {
+        if(customElements.get(SyntaxHighlight.name))
+            return;
+
+        if(!this.props.data)
+            return;
+
+        if(this.props.compact)
+            return;
+        
+        const article = this.props.data.article;
+
+        if(!article.content.includes(SyntaxHighlight.name))
+            return;
+
+        customElements.define(SyntaxHighlight.name, SyntaxHighlight.execute());
     };
 
     render() {
