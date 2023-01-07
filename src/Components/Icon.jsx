@@ -28,6 +28,6 @@ export const IconNames = {
     "fab-react": fabReact
 };
 
-export function Icon({ icon }) {
-    return <FontAwesomeIcon icon={icon} height="1em"/>;
+export function Icon({ icon, ...props }) {
+    return <FontAwesomeIcon icon={icon} height="1em" {...props}/>;
 };

@@ -27,8 +27,12 @@
 
         position: relative;
 
+        display: flex;
+
+        align-items: center;
+
         .article-tag-icon {
-            margin-right: .4em;
+            margin-right: .3em;
         }
 
         &.article-tag-featured {
