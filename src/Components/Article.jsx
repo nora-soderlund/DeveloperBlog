@@ -7,6 +7,8 @@ import ProgrammerNetworkLink from "./ProgrammerNetworkLink";
 
 import SyntaxHighlight from "./SyntaxHighlight";
 
+import { copyLinkToClipboard } from "./../services/clipboard";
+
 export default class Article extends Component {
     static months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 
@@ -67,7 +69,7 @@ export default class Article extends Component {
                         <h2 className="article-title">{article.title}</h2>
                     </Link>
                 ):(
-                    <h2 className="article-title article-title-link" onClick={() => App.copyToClipboard(window.location.href.replace(window.location.hash, ""))}>
+                    <h2 className="article-title article-title-link" onClick={() => copyLinkToClipboard(window.location.href.replace(window.location.hash, ""))}>
                         {article.title}
 
                         <Icon className="article-link" icon={Icons.fasLink}/>

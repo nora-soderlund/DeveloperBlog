@@ -2,9 +2,11 @@ import { Component } from "react";
 
 import Link from "next/link";
 
-import { Roboto } from "@next/font/google";
+import { Fira_Code, Roboto } from "@next/font/google";
 
 import Icons, { Icon } from "../components/Icon";
+
+import Notifications from "./Notifications";
 
 const roboto = Roboto({
     style: [ "normal", "italic" ],
@@ -13,10 +15,18 @@ const roboto = Roboto({
     display: "swap"
 });
 
+const firaCode = Fira_Code({
+    style: [ "normal" ],
+    weight: [ "400" ],
+    subsets: [ "latin" ],
+    display: "swap",
+    variable: "--fira-code"
+});
+
 export default class Page extends Component {
     render() {
         return (
-            <main className={roboto.className}>
+            <main className={`${roboto.className} ${firaCode.variable}`}>
                 <header>
                     <Link href="/">
                         <p>Welcome to</p>
@@ -50,6 +60,8 @@ export default class Page extends Component {
                         </a>
                     </div>
                 </footer>
+
+                <Notifications/>
             </main>
         );
     };

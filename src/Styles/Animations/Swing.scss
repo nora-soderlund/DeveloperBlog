@@ -1,0 +1,12 @@
+@keyframes swing {
+    0% { transform: translate3d(0, -300%, 0) }
+    58% { transform: translate3d(0, 12px, 0) }
+    73% { transform: translate3d(0, -8px, 0) }
+    88% { transform: translate3d(0, 4px, 0) }
+}
+
+.swing {
+    animation-name: swing;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
