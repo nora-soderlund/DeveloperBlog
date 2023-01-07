@@ -7,6 +7,7 @@ import { copyLinkToClipboard } from "Services/Clipboard";
 import Icons, { Icon, IconNames } from "./Icons";
 import ProgrammerNetworkLink from "./ProgrammerNetworkLink";
 import SyntaxHighlight from "./SyntaxHighlight";
+import API from "Services/API";
 
 export default class Article extends Component {
     static months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
@@ -33,6 +34,12 @@ export default class Article extends Component {
         customElements.define(SyntaxHighlight.name, SyntaxHighlight.execute());
     };
 
+    async feedbackDidUpdate(feedback) {
+        await API.setArticleFeedbackBySlug(this.props.data.article.slug, feedback);
+
+        this.setState({ feedback });
+    };
+
     render() {
         if(!this.props.data) {
             return (
@@ -55,6 +62,7 @@ export default class Article extends Component {
         }
 
         const article = this.props.data.article;
+        const feedback = (this.state && this.state.feedback !== undefined)?(this.state.feedback):(this.props.data.feedback);
 
         const date = new Date(article.timestamp);
         const month = (Article.months)[date.getMonth()];
@@ -102,19 +110,19 @@ export default class Article extends Component {
 
                 {(!this.props.compact) && (
                     <div className="article-feedback">
-                        {(!article.feedback)?(
+                        {(feedback === null)?(
                             <p>Was this article useful for you?</p>
                         ):(
                             <p>Thank you for your feedback!</p>
                         )}
 
                         <div className="article-feedback-buttons">
-                            <div className="article-feedback-button" onClick={() => this.onFeedbackClick(true)}>
-                                <Icon icon={(article.feedback && article.feedback.positive)?(Icons.fasThumbsUp):(Icons.farThumbsUp)}/>
+                            <div className="article-feedback-button" onClick={() => this.feedbackDidUpdate((feedback !== true)?(true):(null))}>
+                                <Icon icon={(feedback === true)?(Icons.fasThumbsUp):(Icons.farThumbsUp)}/>
                             </div>
 
-                            <div className="article-feedback-button" onClick={() => this.onFeedbackClick(false)}>
-                                <Icon icon={(article.feedback && !article.feedback.positive)?(Icons.fasThumbsDown):(Icons.farThumbsDown)}/>
+                            <div className="article-feedback-button" onClick={() => this.feedbackDidUpdate((feedback !== false)?(false):(null))}>
+                                <Icon icon={(feedback === false)?(Icons.fasThumbsDown):(Icons.farThumbsDown)}/>
                             </div>
                         </div>
                     </div>

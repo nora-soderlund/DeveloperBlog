@@ -13,8 +13,10 @@ export default async function handler(request: NextApiRequest, response: NextApi
     if(article === null)
         return response.status(400).json(null);
 
+    const feedback: boolean | null = await Articles.getArticleFeedback(article, (request.headers["CF-Connecting-IP"] ?? request.socket.remoteAddress) as string);
+
     response.status(200).json({
         article,
-        feedback: null
+        feedback
     });
 };

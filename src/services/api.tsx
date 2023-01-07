@@ -1,6 +1,4 @@
-import { ArticlesResponse } from "../pages/api/v1/articles";
-import { ArticleResponse } from "../pages/api/v1/articles/[slug]";
-import { CodeResponse } from "../pages/api/v1/code";
+import { ArticleResponse, ArticlesResponse, CodeResponse } from "Types/Responses";
 
 export default class API {
     static async getArticleSlugsByPagination(start: number = 0, tag: string | null = null): Promise<ArticlesResponse | null> {
@@ -41,6 +39,13 @@ export default class API {
             body
         });
 
+        const result = await response.json();
+
+        return result;
+    };
+
+    static async setArticleFeedbackBySlug(slug: string, feedback: boolean | null): Promise<void> {
+        const response = await fetch(`/api/v1/articles/${slug}/feedback?feedback=${feedback}`);
         const result = await response.json();
 
         return result;

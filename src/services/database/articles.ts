@@ -69,4 +69,60 @@ export default class Articles {
 
         return rows as ArticleSlugs[];
     };
+
+    static async getArticleFeedback(article: Article, remoteAddress: string): Promise<boolean | null> {
+        const { error, row } = await Database.querySingleAsync(`SELECT positive FROM article_feedback WHERE article = ${Database.escape(article.id)} AND remoteAddress = ${Database.escape(remoteAddress)}`);
+
+        if(error) {
+            console.error(`Fatally failed to get article feedback by id ${article.id} and remote address ${remoteAddress} (code: ${error.code})`);
+
+            return null;
+        }
+
+        if(!row)
+            return null;
+
+        return !!row.positive as boolean;
+    };
+
+    static async setArticleFeedback(article: Article, remoteAddress: string, feedback: boolean | null): Promise<boolean | null> {
+        const currentFeedback: boolean | null = await this.getArticleFeedback(article, remoteAddress);
+
+        if(currentFeedback === feedback)
+            return !!feedback as boolean;
+        
+        if(feedback === null) {
+            const { error, row } = await Database.querySingleAsync(`DELETE FROM article_feedback WHERE article = ${Database.escape(article.id)} AND remoteAddress = ${Database.escape(remoteAddress)}`);
+    
+            if(error) {
+                console.error(`Fatally failed to delete article feedback by id ${article.id}, remote address ${remoteAddress} (code: ${error.code})`);
+    
+                return null;
+            }
+
+            return !!feedback as boolean;
+        }
+
+        if(currentFeedback === null) {
+            const { error, row } = await Database.querySingleAsync(`INSERT INTO article_feedback (article, remoteAddress, positive, timestamp) VALUES (${Database.escape(article.id)}, ${Database.escape(remoteAddress)}, ${feedback}, ${Date.now()})`);
+
+            if(error) {
+                console.error(`Fatally failed to create article feedback by id ${article.id}, remote address ${remoteAddress}, and feedback ${feedback} (code: ${error.code})`);
+
+                return null;
+            }
+
+            return !!feedback as boolean;
+        }
+
+        const { error, row } = await Database.querySingleAsync(`UPDATE article_feedback SET positive = ${Database.escape(feedback)}, timestamp = ${Database.escape(Date.now())} WHERE article = ${Database.escape(article.id)} AND remoteAddress = ${Database.escape(remoteAddress)}`);
+
+        if(error) {
+            console.error(`Fatally failed to update article feedback by id ${article.id}, remote address ${remoteAddress}, and feedback ${feedback} (code: ${error.code})`);
+
+            return null;
+        }
+
+        return !!feedback as boolean;
+    };
 };
