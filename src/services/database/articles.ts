@@ -1,29 +1,8 @@
 import Database from "./../database";
 
-import Tags, { Tag } from "./tags";
+import Tags from "./tags";
 
-export type Article = {
-    id: number,
-    slug: string,
-    title: string,
-    short: string,
-    content: string,
-    network: string | null,
-    timestamp: number,
-
-    tags: Tag[] | null
-};
-
-export type ArticleTag = {
-    id: number,
-    tag: number,
-    article: number
-};
-
-export type ArticleSlugs = {
-    id: number,
-    slug: string
-};
+import { Article, ArticleTag, ArticleSlugs, Tag } from "./../../Types";
 
 export default class Articles {
     static async getArticleBySlug(slug: string): Promise<Article | null> {

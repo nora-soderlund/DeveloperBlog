@@ -3,10 +3,7 @@ import Codes, { Code } from "../../../services/database/codes";
 
 import shiki from "shiki";
 
-export type CodeResponse = {
-    code: Code | null,
-    html: string
-};
+import { CodeResponse } from "../../../Types/Responses";
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse<CodeResponse | null>) {
     if(request.body === undefined)

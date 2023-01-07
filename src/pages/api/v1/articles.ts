@@ -1,11 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Articles, { ArticleSlugs } from "../../../services/database/articles";
+import Articles from "../../../services/database/articles";
 
-export type ArticlesResponse = {
-    paginatable: boolean,
-    articles: string[],
-    end: number
-};
+import { ArticleSlugs } from "../../../Types";
+import { ArticlesResponse } from "../../../Types/Responses";
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse<ArticlesResponse | null>) {
     const start: number = (request.query.start !== undefined)?(Math.max(0, parseInt(request.query.start as string))):(0);

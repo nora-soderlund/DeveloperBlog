@@ -1,10 +1,6 @@
 import Database from "../database";
 
-export type Code = {
-    id: number,
-    language: string,
-    code: string
-};
+import { Code } from "./../../Types";
 
 export default class Codes {
     static async getCodeById(id: number): Promise<Code | null> {

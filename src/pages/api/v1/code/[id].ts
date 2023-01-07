@@ -1,8 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Codes, { Code } from "../../../../services/database/codes";
-import { CodeResponse } from "../code";
 
 import shiki from "shiki";
+
+import Codes from "../../../../services/database/codes";
+
+import { Code } from "../../../../Types";
+import { CodeResponse } from "../../../../Types/Responses";
+
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse<CodeResponse | null>) {
     const id: number = parseInt(request.query.id as string);

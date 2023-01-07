@@ -2,11 +2,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import Database from "./../../services/database";
 
-type Status = {
-    health: string
-};
+import { StatusResponse } from "../../Types/Responses";
 
-export default async function handler(request: NextApiRequest, response: NextApiResponse<Status>) {
+export default async function handler(request: NextApiRequest, response: NextApiResponse<StatusResponse>) {
     response.status(200);
 
     const { error } = await Database.querySingleAsync("SELECT 1");

@@ -1,10 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Articles, { Article, ArticleTag } from "../../../../services/database/articles";
+import Articles from "../../../../services/database/articles";
 
-export type ArticleResponse = {
-    article: Article,
-    feedback: boolean | null
-};
+import { Article } from "../../../../Types";
+import { ArticleResponse } from "../../../../Types/Responses";
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse<ArticleResponse | null>) {
     const compact: boolean = (request.query.compact === "true")?(true):(false);

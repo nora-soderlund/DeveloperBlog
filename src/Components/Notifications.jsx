@@ -23,6 +23,7 @@ export default class Notifications extends Component {
 
         this.setState({ notifications });
 
+        // TODO: add a fade out animation 
         setTimeout(() => {
             if(this.state.notifications.find((_notification) => _notification.id === notification.id))
                 this.setState({ notifications: this.state.notifications.filter((_notification) => _notification.id != notification.id) });
