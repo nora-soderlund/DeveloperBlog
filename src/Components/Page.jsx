@@ -9,7 +9,8 @@ import Icons, { Icon } from "../components/Icon";
 const roboto = Roboto({
     style: [ "normal", "italic" ],
     weight: [ "400", "500" ],
-    subsets: [ "latin" ]
+    subsets: [ "latin" ],
+    display: "swap"
 });
 
 export default class Page extends Component {
