@@ -1,8 +1,8 @@
-import Database from "./../database";
+import Database from "../Database";
 
-import Tags from "./tags";
+import Tags from "./Tags";
 
-import { Article, ArticleTag, ArticleSlugs, Tag } from "./../../Types";
+import { Article, ArticleTag, ArticleSlugs, Tag } from "../../Types";
 
 export default class Articles {
     static async getArticleBySlug(slug: string): Promise<Article | null> {

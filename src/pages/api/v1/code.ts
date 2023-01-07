@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Codes, { Code } from "../../../services/database/codes";
 
 import shiki from "shiki";
 

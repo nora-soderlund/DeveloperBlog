@@ -1,11 +1,8 @@
 import { Component } from "react";
-
 import Link from "next/link";
-
 import { Fira_Code, Roboto } from "@next/font/google";
 
-import Icons, { Icon } from "../components/Icon";
-
+import Icons, { Icon } from "./Icons";
 import Notifications from "./Notifications";
 
 const roboto = Roboto({

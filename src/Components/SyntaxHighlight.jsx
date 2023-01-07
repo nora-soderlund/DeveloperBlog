@@ -1,4 +1,4 @@
-import API from "../services/api";
+import API from "Services/API";
 
 export default class SyntaxHighlight {
     static name = "syntax-highlight";

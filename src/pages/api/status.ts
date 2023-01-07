@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import Database from "./../../services/database";
+import Database from "Services/Database";
 
-import { StatusResponse } from "../../Types/Responses";
+import { StatusResponse } from "Types/Responses";
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse<StatusResponse>) {
     response.status(200);

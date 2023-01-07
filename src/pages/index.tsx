@@ -1,17 +1,12 @@
 import { Component } from "react";
-
 import Head from "next/head";
 
-// Types
-import { ArticlesResponse } from "./api/v1/articles";
-import { ArticleResponse } from "./api/v1/articles/[slug]";
+import { ArticleResponse, ArticlesResponse } from "Types/Responses";
 
-// Components
-import Page from "./../components/Page";
-import Article from "./../components/Article";
+import Page from "Components/Page";
+import Article from "Components/Article";
 
-// Services
-import API from "../services/api";
+import API from "Services/API";
 
 type IndexPageProps = {
     tag: string | null

@@ -2,10 +2,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import shiki from "shiki";
 
-import Codes from "../../../../services/database/codes";
+import Codes from "Services/Database/Codes";
 
-import { Code } from "../../../../Types";
-import { CodeResponse } from "../../../../Types/Responses";
+import { Code } from "Types";
+import { CodeResponse } from "Types/Responses";
 
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse<CodeResponse | null>) {

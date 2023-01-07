@@ -2,12 +2,11 @@ import { Component } from "react";
 
 import Link from "next/link";
 
-import Icons, { Icon, IconNames } from "./Icon";
+import { copyLinkToClipboard } from "Services/Clipboard";
+
+import Icons, { Icon, IconNames } from "./Icons";
 import ProgrammerNetworkLink from "./ProgrammerNetworkLink";
-
 import SyntaxHighlight from "./SyntaxHighlight";
-
-import { copyLinkToClipboard } from "./../services/clipboard";
 
 export default class Article extends Component {
     static months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];

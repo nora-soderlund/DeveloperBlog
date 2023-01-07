@@ -1,6 +1,6 @@
-import Database from "../database";
+import Database from "../Database";
 
-import { Code } from "./../../Types";
+import { Code } from "../../Types";
 
 export default class Codes {
     static async getCodeById(id: number): Promise<Code | null> {

@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Articles from "../../../services/database/articles";
+import Articles from "Services/Database/Articles";
 
-import { ArticleSlugs } from "../../../Types";
-import { ArticlesResponse } from "../../../Types/Responses";
+import { ArticleSlugs } from "Types";
+import { ArticlesResponse } from "Types/Responses";
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse<ArticlesResponse | null>) {
     const start: number = (request.query.start !== undefined)?(Math.max(0, parseInt(request.query.start as string))):(0);

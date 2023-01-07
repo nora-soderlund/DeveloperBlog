@@ -1,16 +1,16 @@
-import { withRouter } from "next/router";
 import { Component } from "react";
 
 import Head from "next/head";
-
-import Page from "../../components/Page";
-import Article from "../../components/Article";
-
-import { ArticleResponse } from "../api/v1/articles/[slug]";
-
+import { withRouter } from "next/router";
 import { WithRouterProps } from "next/dist/client/with-router";
 
-import API from "../../services/api";
+import { ArticleResponse } from "Types/Responses";
+
+import API from "Services/API";
+
+import Page from "Components/Page";
+import Article from "Components/Article";
+
 
 type ArticlePageProps = WithRouterProps & {
     slug: string

@@ -1,6 +1,6 @@
-import Database from "./../database";
+import Database from "../Database";
 
-import { ArticleTag, Tag } from "./../../Types";
+import { ArticleTag, Tag } from "../../Types";
 
 export default class Tags {
     static async getTagsById(ids: number[]): Promise<Tag[] | null> {

@@ -1,5 +1,5 @@
-import { withRouter } from "next/router";
 import { Component } from "react";
+import { withRouter } from "next/router";
 
 import IndexPage from "../index";
 
