@@ -15,7 +15,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
     if(article === null)
         return response.status(400).json(null);
 
-    await Articles.setArticleFeedback(article, (request.headers["proxy-ip"] ?? request.socket.remoteAddress) as string, feedback);
+    await Articles.setArticleFeedback(article, request.headers["X-Proxy-Connecting-IP"] as string, feedback);
 
     response.status(200).json(feedback);
 };
