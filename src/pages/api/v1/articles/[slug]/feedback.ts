@@ -6,7 +6,6 @@ import { ArticleResponse } from "Types/Responses";
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse<boolean | null>) {
     const slug: string = request.query.slug as string;
-    console.log(request.query.feedback);
     const feedback: boolean | null = (request.query.feedback === "true")?(true):(
         (request.query.feedback === "false")?(false):(null)
     );

@@ -5,19 +5,6 @@ export default class SyntaxHighlight {
     
     static execute = () => {
         return class SyntaxHighlight extends HTMLElement {
-            constructor() {
-                super();
-
-                this.test = this.innerHTML;
-        
-                //this.attachShadow({ mode: "open" });
-
-                //this.pre = document.createElement("pre");
-                //pre.innerHTML = this.innerHTML.replace(/[\u00A0-\u9999<>\&]/g, (i) => '&#' + i.charCodeAt(0) + ';');
-
-                //this.shadowRoot.append(this.pre);
-            };
-
             async connectedCallback() {
                 this.classList.add("shimmer");
 
@@ -38,7 +25,7 @@ export default class SyntaxHighlight {
                     this.classList.remove("shimmer");
                 }
                 else if(this.innerHTML.length != 0) {
-                    const body = this.test;
+                    const body = this.innerHTML;
 
                     this.innerHTML = `<div style="height: ${this.getAttribute("lines") ?? body.split('\n').length}em"></div>`;
                     
