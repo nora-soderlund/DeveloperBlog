@@ -113,8 +113,10 @@ class ArticlePage extends Component<ArticlePageProps, ArticlePageState> {
                     <meta name="viewport" content="width=device-width, initial-scale=1"/>
                     
                     <meta property="og:title" content="Nora Söderlund's Developer Blog"/>
-
+                    <meta property="og:description" content={this.props.meta.description}/>
                     <meta property="og:type" content="article"/>
+                    <meta property="og:url" content={`https://nora-soderlund/articles/${this.props.slug}`}/>
+                    <meta property="og:image" content={`https://nora-soderlund/images/articles/${this.props.slug}.png`}/>
                     <meta property="og:article:published_time" content={new Date(this.props.meta.timestamp).toISOString()}/>
                     <meta property="og:article:section" content="Programming"/>
                     {(this.props.meta.tags.map((tag) => 
