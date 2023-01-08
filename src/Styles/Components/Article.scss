@@ -12,6 +12,10 @@ article {
     .article-title {
         &.article-title-link {
             cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
         }
 
         .article-link {

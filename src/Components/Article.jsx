@@ -1,10 +1,13 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import App from "../App";
-import Articles from "../Services/API/Articles";
+import Link from "next/link";
+
+import { copyLinkToClipboard } from "Services/Clipboard";
+
+import Icons, { Icon, IconNames } from "./Icons";
 import ProgrammerNetworkLink from "./ProgrammerNetworkLink";
+import SyntaxHighlight from "./SyntaxHighlight";
+import API from "Services/API";
 
 export default class Article extends Component {
     static months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
@@ -13,72 +16,32 @@ export default class Article extends Component {
         return number + (number > 0 ? ['th', 'st', 'nd', 'rd'][(number > 3 && number < 21) || number % 10 > 3 ? 0 : number % 10] : '');
     };
 
-    componentDidMount() {
-        if(this.props?.slug) {
-            Articles.getAsync(this.props.slug).then((article) => this.setState({ article }));
-        }
-    };
+    componentDidUpdate() {
+        if(customElements.get(SyntaxHighlight.name))
+            return;
 
-    hash = undefined;
+        if(!this.props.data)
+            return;
 
-    componentDidUpdate(previousProps, previousState) {
-        if(previousState?.article !== this.state?.article && this.props?.onData)
-            this.props.onData(this.state.article);
-
-        const hash = window.location.hash.substring(1);
-
-        if(hash !== this.hash) {
-            this.resetPreviousTab();
-
-            this.hash = hash;
-
-            if(hash.length !== 0) {
-                const tabElement = document.querySelector(`.article-tab[href="#${hash}"]`);
-
-                if(tabElement != null) {
-                    tabElement.classList.add("active");
-
-                    const element = document.getElementById(hash);
-
-                    element.classList.add("active");
-                }
-            }
-            else {
-                const defaultElement = document.querySelector(".article-tab[default]");
+        if(this.props.compact)
+            return;
         
-                if(defaultElement) {
-                    defaultElement.classList.add("active");
+        const article = this.props.data.article;
 
-                    const element = document.getElementById(defaultElement.getAttribute("href").substring(1));
+        if(!article.content.includes(SyntaxHighlight.name))
+            return;
 
-                    element.classList.add("active");
-                }
-            }
-        }
+        customElements.define(SyntaxHighlight.name, SyntaxHighlight.execute());
     };
 
-    resetPreviousTab() {
-        const previousElement = document.querySelector(".article-tab.active");
-   
-        if(previousElement) {
-            previousElement.classList.remove("active");
+    async feedbackDidUpdate(feedback) {
+        await API.setArticleFeedbackBySlug(this.props.data.article.slug, feedback);
 
-            const element = document.getElementById(previousElement.getAttribute("href").substring(1));
-
-            element.classList.remove("active");
-        }
-    };
-
-    onFeedbackClick(positive) {
-        fetch(`${process.env.REACT_APP_API ?? ""}/api/v1/article/feedback?slug=${this.props.slug}&positive=${positive}`)
-            .then((response) => response.json())
-            .then((result) => this.setState({ article: { ...this.state.article, feedback: result } }));
+        this.setState({ feedback });
     };
 
     render() {
-        const article = this.state?.article ?? Articles.getCached(this.props.slug);
-
-        if(!article) {
+        if(!this.props.data) {
             return (
                 <article>
                     <span className="article-date shimmer"></span>
@@ -98,6 +61,9 @@ export default class Article extends Component {
             );
         }
 
+        const article = this.props.data.article;
+        const feedback = (this.state && this.state.feedback !== undefined)?(this.state.feedback):(this.props.data.feedback);
+
         const date = new Date(article.timestamp);
         const month = (Article.months)[date.getMonth()];
 
@@ -106,14 +72,14 @@ export default class Article extends Component {
                 <span className="article-date">{month} {Article.getOrdinalNumber(date.getDate())}, {date.getFullYear()}</span>
 
                 {(this.props?.compact)?(
-                    <Link to={`/articles/${this.props.slug}`}>
+                    <Link href={`/articles/${article.slug}`}>
                         <h2 className="article-title">{article.title}</h2>
                     </Link>
                 ):(
-                    <h2 className="article-title article-title-link" onClick={() => App.copyToClipboard(window.location.href.replace(window.location.hash, ""))}>
+                    <h2 className="article-title article-title-link" onClick={() => copyLinkToClipboard(window.location.href.replace(window.location.hash, ""))}>
                         {article.title}
 
-                        <FontAwesomeIcon className="article-link" icon={["fas", "link"]}/>
+                        <Icon className="article-link" icon={Icons.fasLink}/>
                     </h2>
                 )}
 
@@ -122,12 +88,12 @@ export default class Article extends Component {
                 <div className="article-tags">
                     <div className="article-tags-content">
                         {article.tags.map((tag) => (
-                            <Link to={`/tags/${tag.slug}`} key={tag.slug}>
+                            <Link href={`/tags/${tag.slug}`} key={tag.slug}>
                                 <span className={`article-tag ${(tag.shimmer)?("article-tag-featured"):("")}`} style={tag.color && {
                                     color: tag.color,
                                     borderColor: tag.color
                                 }}>
-                                    {(tag.icon) && (<FontAwesomeIcon className="article-tag-icon" icon={[ tag.icon.substring(0, tag.icon.indexOf('-')), tag.icon.substring(tag.icon.indexOf('-') + 1) ]}/>)}
+                                    {(tag.icon) && (<Icon className="article-tag-icon" icon={IconNames[tag.icon]}/>)}
                                     
                                     {tag.text}
                                 </span>
@@ -144,19 +110,19 @@ export default class Article extends Component {
 
                 {(!this.props.compact) && (
                     <div className="article-feedback">
-                        {(!article.feedback)?(
+                        {(feedback === null)?(
                             <p>Was this article useful for you?</p>
                         ):(
                             <p>Thank you for your feedback!</p>
                         )}
 
                         <div className="article-feedback-buttons">
-                            <div className="article-feedback-button" onClick={() => this.onFeedbackClick(true)}>
-                                <FontAwesomeIcon icon={[(article.feedback && article.feedback.positive)?("fas"):("far"), "thumbs-up"]}/>
+                            <div className="article-feedback-button" onClick={() => this.feedbackDidUpdate((feedback !== true)?(true):(null))}>
+                                <Icon icon={(feedback === true)?(Icons.fasThumbsUp):(Icons.farThumbsUp)}/>
                             </div>
 
-                            <div className="article-feedback-button" onClick={() => this.onFeedbackClick(false)}>
-                                <FontAwesomeIcon icon={[(article.feedback && !article.feedback.positive)?("fas"):("far"), "thumbs-down"]}/>
+                            <div className="article-feedback-button" onClick={() => this.feedbackDidUpdate((feedback !== false)?(false):(null))}>
+                                <Icon icon={(feedback === false)?(Icons.fasThumbsDown):(Icons.farThumbsDown)}/>
                             </div>
                         </div>
                     </div>
@@ -169,5 +135,5 @@ export default class Article extends Component {
                 )}
             </article>
         );
-    };
+    }
 };

@@ -1,0 +1,61 @@
+syntax-highlight {
+    display: block;
+    
+    width: 100%;
+
+    border-radius: 6px;
+
+    font-family: var(--fira-code);
+    font-size: .8em;
+
+    background: darken($background, 2%);
+
+    &.inline {
+        background: none;
+
+        width: min-content;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        pre {
+            margin: 0;
+            padding: 0 !important;
+        }
+    }
+
+    &.shimmer {
+        max-width: 100%;
+    }
+
+    pre {
+        overflow: auto;
+
+        font-family: inherit;
+        
+        code {
+            font-family: inherit;
+        }
+
+        &::-webkit-scrollbar {
+            height: 4px;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            background: none;
+    
+            border-radius: 3px;
+        }
+    
+        &:hover {
+            &::-webkit-scrollbar-thumb {
+                background: $color;
+            }
+        }
+
+        padding: .6em !important;
+
+        background: none !important;
+    }
+}
