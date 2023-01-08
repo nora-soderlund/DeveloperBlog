@@ -15,7 +15,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
     if(article === null)
         return response.status(400).json(null);
 
-    await Articles.setArticleFeedback(article, (request.headers["cf-connecting-ip"] ?? request.socket.remoteAddress) as string, feedback);
+    await Articles.setArticleFeedback(article, request.headers["cf-connecting-ip"] as string, feedback);
 
     response.status(200).json(feedback);
 };
