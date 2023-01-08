@@ -12,6 +12,14 @@ export type Article = {
     tags: Tag[] | null
 };
 
+export type ArticleMeta = {
+    slug: string,
+    title: string,
+    description: string,
+    timestamp: number,
+    tags: string[]
+};
+
 export type ArticleTag = {
     id: number,
     tag: number,

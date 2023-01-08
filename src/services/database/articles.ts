@@ -2,7 +2,7 @@ import Database from "../Database";
 
 import Tags from "./Tags";
 
-import { Article, ArticleTag, ArticleSlugs, Tag } from "../../Types";
+import { Article, ArticleMeta, ArticleTag, ArticleSlugs, Tag } from "../../Types";
 
 export default class Articles {
     static async getArticleBySlug(slug: string): Promise<Article | null> {
@@ -31,6 +31,34 @@ export default class Articles {
             ...row as Article,
 
             tags
+        };
+    };
+    static async getArticleMetaBySlug(slug: string): Promise<ArticleMeta | null> {
+        const { error, row } = await Database.querySingleAsync(`SELECT id, slug, title, description, timestamp FROM articles WHERE slug = ${Database.escape(slug)}`);
+        
+        if(error) {
+            console.error(`Fatally failed to get article by slug: ${slug} (code: ${error.code})`);
+
+            return null;
+        }
+
+        if(!row) {
+            console.warn(`Failed to find article by slug: ${slug}`);
+
+            return null;
+        }
+
+        let tags: Tag[] | null = null;
+
+        const articleTags: ArticleTag[] | null = await this.getArticleTags(row);
+
+        if(articleTags !== null)
+            tags = await Tags.getTagsByArticleTags(articleTags);
+
+        return {
+            ...row as ArticleMeta,
+
+            tags: tags?.map((tag) => tag.text) as string[]
         };
     };
 
