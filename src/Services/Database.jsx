@@ -7,6 +7,9 @@ export default class Database {
 
     static connect() {
         return new Promise((resolve) => {
+            if(this.connection !== null && this.connection.state !== "disconnected")
+                resolve({ error: null });
+
             this.connection = mysql.createConnection(config.database);
     
             this.connection.connect((error) => {
