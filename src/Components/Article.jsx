@@ -4,18 +4,14 @@ import Link from "next/link";
 
 import { copyLinkToClipboard } from "Services/Clipboard";
 
+import Dates from "Services/Dates";
+
 import Icons, { Icon, IconNames } from "./Icons";
 import ProgrammerNetworkLink from "./ProgrammerNetworkLink";
 import SyntaxHighlight from "./SyntaxHighlight";
 import API from "Services/API";
 
 export default class Article extends Component {
-    static months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-
-    static getOrdinalNumber(number) {
-        return number + (number > 0 ? ['th', 'st', 'nd', 'rd'][(number > 3 && number < 21) || number % 10 > 3 ? 0 : number % 10] : '');
-    };
-
     componentDidUpdate() {
         if(customElements.get(SyntaxHighlight.name))
             return;
@@ -65,11 +61,10 @@ export default class Article extends Component {
         const feedback = (this.state && this.state.feedback !== undefined)?(this.state.feedback):(this.props.data.feedback);
 
         const date = new Date(article.timestamp);
-        const month = (Article.months)[date.getMonth()];
 
         return (
             <article>
-                <span className="article-date">{month} {Article.getOrdinalNumber(date.getDate())}, {date.getFullYear()}</span>
+                <span className="article-date">{Dates.months[date.getMonth()]} {Dates.getOrdinalNumber(date.getDate())}, {date.getFullYear()}</span>
 
                 {(this.props?.compact)?(
                     <Link href={`/articles/${article.slug}`}>

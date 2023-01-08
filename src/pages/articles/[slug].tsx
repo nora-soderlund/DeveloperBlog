@@ -116,7 +116,7 @@ class ArticlePage extends Component<ArticlePageProps, ArticlePageState> {
                     <meta property="og:description" content={this.props.meta.description}/>
                     <meta property="og:type" content="article"/>
                     <meta property="og:url" content={`https://nora-soderlund.se/articles/${this.props.slug}`}/>
-                    <meta property="og:image" content={`https://nora-soderlund.se/images/articles/${this.props.slug}.png`}/>
+                    <meta property="og:image" content={`https://nora-soderlund.se/api/v1/articles/restricting-a-google-maps-api-key/${this.props.slug}/thumbnail.png`}/>
 
                     <meta property="og:article:published_time" content={new Date(this.props.meta.timestamp).toISOString()}/>
                     <meta property="og:article:section" content="Programming"/>
