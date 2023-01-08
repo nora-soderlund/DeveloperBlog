@@ -112,7 +112,7 @@ class ArticlePage extends Component<ArticlePageProps, ArticlePageState> {
                     <meta name="theme-color" content="#1A202C"/>
                     <meta name="viewport" content="width=device-width, initial-scale=1"/>
                     
-                    <meta property="og:title" content={`${this.props.meta.title} - Nora Söderlund's Developer Blog`}/>
+                    <meta property="og:title" content={`${this.props.meta.title}`}/>
                     <meta property="og:description" content={this.props.meta.description}/>
                     <meta property="og:type" content="article"/>
                     <meta property="og:url" content={`https://nora-soderlund.se/articles/${this.props.slug}`}/>
