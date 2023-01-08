@@ -1,3 +1,4 @@
 export type StatusResponse = {
-    health: string
+    health: string,
+    remoteAddress: string
 };

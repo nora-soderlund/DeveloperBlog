@@ -11,13 +11,15 @@ export default async function handler(request: NextApiRequest, response: NextApi
 
     if(error) {
         response.json({
-            health: "BAD"
+            health: "BAD",
+            remoteAddress: request.headers["x-proxy-connecting-ip"] as string
         });
 
         return;
     }
 
     response.json({
-        health: "OK"
+        health: "OK",
+        remoteAddress: request.headers["x-proxy-connecting-ip"] as string
     });
 };
