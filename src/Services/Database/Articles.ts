@@ -6,6 +6,8 @@ import { Article, ArticleMeta, ArticleTag, ArticleSlugs, Tag } from "../../Types
 
 export default class Articles {
     static async getArticleBySlug(slug: string): Promise<Article | null> {
+        await Database.ensureConnectionAsync();
+
         const { error, row } = await Database.querySingleAsync(`SELECT id, slug, title, short, content, network, timestamp FROM articles WHERE slug = ${Database.escape(slug)}`);
         
         if(error) {
@@ -33,7 +35,10 @@ export default class Articles {
             tags
         };
     };
+
     static async getArticleMetaBySlug(slug: string): Promise<ArticleMeta | null> {
+        await Database.ensureConnectionAsync();
+
         const { error, row } = await Database.querySingleAsync(`SELECT id, slug, title, description, timestamp FROM articles WHERE slug = ${Database.escape(slug)}`);
         
         if(error) {
@@ -63,6 +68,8 @@ export default class Articles {
     };
 
     static async getArticleTags(article: Article): Promise<ArticleTag[] | null> {
+        await Database.ensureConnectionAsync();
+        
         const { error, rows } = await Database.queryAsync(`SELECT tag FROM article_tags WHERE article = ${Database.escape(article.id)}`);
 
         if(error) {
@@ -78,6 +85,8 @@ export default class Articles {
     };
 
     static async getArticleSlugsByPagination(start: number, limit: number, slug: string | null): Promise<ArticleSlugs[] | null> {
+        await Database.ensureConnectionAsync();
+        
         const { error, rows } = await Database.queryAsync(`
             SELECT articles.id, articles.slug FROM articles
                 INNER JOIN article_tags ON article_tags.article = articles.id
@@ -99,6 +108,8 @@ export default class Articles {
     };
 
     static async getArticleFeedback(article: Article, remoteAddress: string): Promise<boolean | null> {
+        await Database.ensureConnectionAsync();
+        
         const { error, row } = await Database.querySingleAsync(`SELECT positive FROM article_feedback WHERE article = ${Database.escape(article.id)} AND remoteAddress = ${Database.escape(remoteAddress)}`);
 
         if(error) {
@@ -114,6 +125,8 @@ export default class Articles {
     };
 
     static async setArticleFeedback(article: Article, remoteAddress: string, feedback: boolean | null): Promise<boolean | null> {
+        await Database.ensureConnectionAsync();
+        
         const currentFeedback: boolean | null = await this.getArticleFeedback(article, remoteAddress);
 
         if(currentFeedback === feedback)

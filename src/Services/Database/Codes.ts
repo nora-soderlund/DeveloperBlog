@@ -4,6 +4,8 @@ import { Code } from "../../Types";
 
 export default class Codes {
     static async getCodeById(id: number): Promise<Code | null> {
+        await Database.ensureConnectionAsync();
+        
         const { error, row } = await Database.querySingleAsync(`SELECT id, language, code FROM codes WHERE id = ${Database.escape(id)}`);
         
         if(error) {
