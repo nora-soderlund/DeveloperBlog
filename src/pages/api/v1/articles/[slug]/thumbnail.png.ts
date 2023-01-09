@@ -8,43 +8,7 @@ import { Article, ArticleTag, Tag } from "Types";
 import Dates from "Services/Dates";
 import Tags from "Services/Database/Tags";
 
-function printAtWordWrap(context: Canvas.CanvasRenderingContext2D, text: string, x: number, y: number, lineHeight: number, fitWidth: number)
-{
-    fitWidth = fitWidth || 0;
-    
-    if (fitWidth <= 0)
-    {
-        context.fillText( text, x, y );
-        
-        return y;
-    }
-    var words = text.split(' ');
-    var currentLine = 0;
-    var idx = 1;
-    while (words.length > 0 && idx <= words.length)
-    {
-        var str = words.slice(0,idx).join(' ');
-        var w = context.measureText(str).width;
-        if ( w > fitWidth )
-        {
-            if (idx==1)
-            {
-                idx=2;
-            }
-            context.fillText( words.slice(0,idx-1).join(' '), x, y + (lineHeight*currentLine) );
-            currentLine++;
-            words = words.splice(idx-1);
-            idx = 1;
-        }
-        else
-        {idx++;}
-    }
-    if  (idx > 0)
-        context.fillText( words.join(' '), x, y + (lineHeight*currentLine) );
-
-    return y;
-}
-
+import { Context2DTextUtils, TextBounds } from "@nora-soderlund/canvas-utils";
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse<string>) {
     const slug: string = request.query.slug as string;
@@ -56,9 +20,6 @@ export default async function handler(request: NextApiRequest, response: NextApi
     response.status(200).setHeader("Content-Type", "image/png");
 
     const canvas = Canvas.createCanvas(1200, 630);
-    canvas.width = 1200;
-    canvas.height = 630;
-
     const context = canvas.getContext("2d");
     context.quality = "best";
     context.patternQuality = "best";
@@ -111,8 +72,12 @@ export default async function handler(request: NextApiRequest, response: NextApi
 
         const content = article.short.replace(/<[^>]*>?/gm, '');
 
+        const contextTextUtils = new Context2DTextUtils(context);
+
         context.fillStyle = "#8B9BBA";
-        top += printAtWordWrap(context, content, left, top, fontSize, canvas.width - left) + fontSize;
+
+        const textBounds: TextBounds = contextTextUtils.fillTextBounds(content, left, top, canvas.width - left, canvas.height - top);
+        top += textBounds.actualHeight + fontSize + (fontSize * .5);
    
         context.restore();
     }
@@ -160,7 +125,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
         context.save();
 
         context.fillStyle = "#1A202C";
-        top = Math.floor((canvas.height - top) / 2) - fontSize;
+        top = Math.floor((canvas.height - top) / 1.5) - fontSize;
 
         context.drawImage(canvas, 0, top);
 
