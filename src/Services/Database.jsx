@@ -4,53 +4,44 @@ import config from "../../config.json" assert { type: "json" };
 
 export default class Database {
     static connecting = null;
-    static connection = null;
+    static pool = null;
 
-    static connectAsync() {
-        // we return promises with no real usage because we still expect a promise even if we don't need one
-        // this is because we want to intercept new connections as they happen during another connection
+    static createPool() {
+        if(this.pool !== null)
+            return;
 
-        if(this.connection !== null && this.connection.state !== "disconnected")
-            return new Promise((resolve) => resolve({ error: null }));
+        this.pool = mysql.createPool({
+            connectionLimit: 6,
 
-        // if we're already connecting, we'll return the same promise, see comments above
-        if(this.connecting !== null)
-            return this.connecting;
-
-        this.connecting = new Promise((resolve) => {
-            this.connection = mysql.createConnection(config.database);
-    
-            this.connection.connect((error) => {
-                this.connecting = null;
-
-                resolve({ error });
-            });
+            ...config.database
         });
 
-        return this.connecting;
+        return this.pool;
     };
 
-    static async ensureConnectionAsync() {
-        if(this.connection === null || this.connection.state === "disconnected") {
-            const { error } = await this.connectAsync();
-
-            if(error)
-                throw new Error(error);
-        }
-    };
-
-    static escape(input) {
-        if(this.connection === null || this.connection.state === "disconnected")
-            throw new Error("You must call Database.ensureConnectionAsync() before calling Database.escape()");
-
-        return this.connection.escape(input);
-    };
-
-    static async queryAsync(query) {
-        await this.ensureConnectionAsync();
-
+    static ensureConnectionAsync() {
         return new Promise(async (resolve) => {
-            this.connection.query(query, (error, rows) => {
+            if(this.pool === null) {
+                const { error } = this.createPool();
+    
+                if(error)
+                    throw new Error(error);
+            }
+    
+            this.pool.getConnection((error, connection) => {
+                resolve(connection);
+            });
+        });
+    };
+
+    static async queryAsync(connection, query) {
+        return new Promise(async (resolve) => {
+            if(query == undefined) {
+                query = connection;
+                connection = this.pool;
+            }
+
+            connection.query(query, (error, rows) => {
                 if(error)
                     resolve({ error, rows });
 
@@ -59,8 +50,8 @@ export default class Database {
         });
     };
 
-    static async querySingleAsync(query) {
-        const { error, rows } = await this.queryAsync(query);
+    static async querySingleAsync(connection, query) {
+        const { error, rows } = await this.queryAsync(connection, query);
 
         if(error)
             return { error, row: null };

@@ -6,9 +6,11 @@ import { Article, ArticleMeta, ArticleTag, ArticleSlugs, Tag } from "../../Types
 
 export default class Articles {
     static async getArticleBySlug(slug: string): Promise<Article | null> {
-        await Database.ensureConnectionAsync();
+        const connection = await Database.ensureConnectionAsync();
 
-        const { error, row } = await Database.querySingleAsync(`SELECT id, slug, title, short, content, network, timestamp FROM articles WHERE slug = ${Database.escape(slug)}`);
+        const { error, row } = await Database.querySingleAsync(connection, `SELECT id, slug, title, short, content, network, timestamp FROM articles WHERE slug = ${connection.escape(slug)}`);
+        
+        connection.release();
         
         if(error) {
             console.error(`Fatally failed to get article by slug: ${slug} (code: ${error.code})`);
@@ -37,10 +39,12 @@ export default class Articles {
     };
 
     static async getArticleMetaBySlug(slug: string): Promise<ArticleMeta | null> {
-        await Database.ensureConnectionAsync();
+        const connection = await Database.ensureConnectionAsync();
 
-        const { error, row } = await Database.querySingleAsync(`SELECT id, slug, title, description, timestamp FROM articles WHERE slug = ${Database.escape(slug)}`);
+        const { error, row } = await Database.querySingleAsync(connection, `SELECT id, slug, title, description, timestamp FROM articles WHERE slug = ${connection.escape(slug)}`);
         
+        connection.release();
+
         if(error) {
             console.error(`Fatally failed to get article by slug: ${slug} (code: ${error.code})`);
 
@@ -68,9 +72,11 @@ export default class Articles {
     };
 
     static async getArticleTags(article: Article): Promise<ArticleTag[] | null> {
-        await Database.ensureConnectionAsync();
+        const connection = await Database.ensureConnectionAsync();
         
-        const { error, rows } = await Database.queryAsync(`SELECT tag FROM article_tags WHERE article = ${Database.escape(article.id)}`);
+        const { error, rows } = await Database.queryAsync(connection, `SELECT tag FROM article_tags WHERE article = ${connection.escape(article.id)}`);
+
+        connection.release();
 
         if(error) {
             console.error(`Fatally failed to get article tags by id: ${article.id} (code: ${error.code})`);
@@ -85,18 +91,20 @@ export default class Articles {
     };
 
     static async getArticleSlugsByPagination(start: number, limit: number, slug: string | null): Promise<ArticleSlugs[] | null> {
-        await Database.ensureConnectionAsync();
+        const connection = await Database.ensureConnectionAsync();
         
-        const { error, rows } = await Database.queryAsync(`
+        const { error, rows } = await Database.queryAsync(connection, `
             SELECT articles.id, articles.slug FROM articles
                 INNER JOIN article_tags ON article_tags.article = articles.id
-                INNER JOIN tags ON tags.id = article_tags.tag ${(slug !== null)?(`AND tags.slug = ${Database.escape(slug)}`):(" ")}
+                INNER JOIN tags ON tags.id = article_tags.tag ${(slug !== null)?(`AND tags.slug = ${connection.escape(slug)}`):(" ")}
             WHERE hidden != 1 ${(start != 0)?(`AND articles.id < ${start}`):("")}
             GROUP BY articles.slug
             ORDER BY
                 tags.priority DESC, timestamp DESC
             LIMIT ${limit}
         `);
+
+        connection.release();
 
         if(error) {
             console.error(`Fatally failed to get articles pagination: start ${start} limit ${limit} slug ${slug} (code: ${error.code})`);
@@ -108,9 +116,11 @@ export default class Articles {
     };
 
     static async getArticleFeedback(article: Article, remoteAddress: string): Promise<boolean | null> {
-        await Database.ensureConnectionAsync();
+        const connection = await Database.ensureConnectionAsync();
         
-        const { error, row } = await Database.querySingleAsync(`SELECT positive FROM article_feedback WHERE article = ${Database.escape(article.id)} AND remoteAddress = ${Database.escape(remoteAddress)}`);
+        const { error, row } = await Database.querySingleAsync(connection, `SELECT positive FROM article_feedback WHERE article = ${connection.escape(article.id)} AND remoteAddress = ${connection.escape(remoteAddress)}`);
+
+        connection.release();
 
         if(error) {
             console.error(`Fatally failed to get article feedback by id ${article.id} and remote address ${remoteAddress} (code: ${error.code})`);
@@ -124,17 +134,19 @@ export default class Articles {
         return !!row.positive as boolean;
     };
 
-    static async setArticleFeedback(article: Article, remoteAddress: string, feedback: boolean | null): Promise<boolean | null> {
-        await Database.ensureConnectionAsync();
-        
+    static async setArticleFeedback(article: Article, remoteAddress: string, feedback: boolean | null): Promise<boolean | null> {        
         const currentFeedback: boolean | null = await this.getArticleFeedback(article, remoteAddress);
 
         if(currentFeedback === feedback)
             return !!feedback as boolean;
         
         if(feedback === null) {
-            const { error, row } = await Database.querySingleAsync(`DELETE FROM article_feedback WHERE article = ${Database.escape(article.id)} AND remoteAddress = ${Database.escape(remoteAddress)}`);
+            const connection = await Database.ensureConnectionAsync();
+
+            const { error, row } = await Database.querySingleAsync(connection, `DELETE FROM article_feedback WHERE article = ${connection.escape(article.id)} AND remoteAddress = ${connection.escape(remoteAddress)}`);
     
+            connection.release();
+
             if(error) {
                 console.error(`Fatally failed to delete article feedback by id ${article.id}, remote address ${remoteAddress} (code: ${error.code})`);
     
@@ -145,7 +157,11 @@ export default class Articles {
         }
 
         if(currentFeedback === null) {
-            const { error, row } = await Database.querySingleAsync(`INSERT INTO article_feedback (article, remoteAddress, positive, timestamp) VALUES (${Database.escape(article.id)}, ${Database.escape(remoteAddress)}, ${feedback}, ${Date.now()})`);
+            const connection = await Database.ensureConnectionAsync();
+
+            const { error, row } = await Database.querySingleAsync(connection, `INSERT INTO article_feedback (article, remoteAddress, positive, timestamp) VALUES (${connection.escape(article.id)}, ${connection.escape(remoteAddress)}, ${feedback}, ${Date.now()})`);
+
+            connection.release();
 
             if(error) {
                 console.error(`Fatally failed to create article feedback by id ${article.id}, remote address ${remoteAddress}, and feedback ${feedback} (code: ${error.code})`);
@@ -156,7 +172,11 @@ export default class Articles {
             return !!feedback as boolean;
         }
 
-        const { error, row } = await Database.querySingleAsync(`UPDATE article_feedback SET positive = ${Database.escape(feedback)}, timestamp = ${Database.escape(Date.now())} WHERE article = ${Database.escape(article.id)} AND remoteAddress = ${Database.escape(remoteAddress)}`);
+        const connection = await Database.ensureConnectionAsync();
+
+        const { error, row } = await Database.querySingleAsync(`UPDATE article_feedback SET positive = ${connection.escape(feedback)}, timestamp = ${connection.escape(Date.now())} WHERE article = ${connection.escape(article.id)} AND remoteAddress = ${connection.escape(remoteAddress)}`);
+
+        connection.release();
 
         if(error) {
             console.error(`Fatally failed to update article feedback by id ${article.id}, remote address ${remoteAddress}, and feedback ${feedback} (code: ${error.code})`);

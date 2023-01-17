@@ -4,10 +4,12 @@ import { Code } from "../../Types";
 
 export default class Codes {
     static async getCodeById(id: number): Promise<Code | null> {
-        await Database.ensureConnectionAsync();
+        const connection = await Database.ensureConnectionAsync();
         
-        const { error, row } = await Database.querySingleAsync(`SELECT id, language, code FROM codes WHERE id = ${Database.escape(id)}`);
+        const { error, row } = await Database.querySingleAsync(`SELECT id, language, code FROM codes WHERE id = ${connection.escape(id)}`);
         
+        connection.release();
+
         if(error) {
             console.error(`Fatally failed to get code by id: ${id} (code: ${error.code})`);
 
