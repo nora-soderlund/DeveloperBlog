@@ -1,8 +1,18 @@
 footer {
-    .footer-links {
-        color: $color;
+    display: flex;
 
-        justify-content: flex-end;
+    color: $color;
+
+    padding-bottom: .5em;
+
+    a {
+        &:hover {
+            color: lighten($color, 25%);
+        }
+    }
+
+    .footer-links {
+        margin-left: auto;
 
         display: flex;
 

@@ -1,0 +1,67 @@
+form {
+    &.disabled {
+        pointer-events: none;
+
+        opacity: .5;
+    }
+
+    fieldset {
+        display: flex;
+    
+        padding-right: 6em;
+    
+        gap: 1em;
+
+        border: none;
+    }
+
+    .form-error {
+        margin: .5em 0 0;
+
+        color: #990000;
+    }
+
+    input {
+        flex: 1;
+
+        font-family: inherit;
+        font-weight: 500;
+        font-size: 1em;
+
+        border: none;
+
+        background: transparent;
+        color: $foreground;
+
+        padding: .4em .2em;
+
+        border-bottom: 1px solid $color;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::placeholder {
+            color: $color;
+        }
+    }
+
+    button {
+        font-family: inherit;
+        font-weight: inherit;
+        font-size: 1em;
+
+        padding: .4em 1em;
+
+        border: none;
+
+        background: lighten($background, 6%);
+        color: $foreground;
+
+        cursor: pointer;
+
+        &:hover {
+            background: lighten($background, 11%);
+        }
+    }
+}

@@ -23,7 +23,7 @@ const firaCode = Fira_Code({
 export default class Page extends Component {
     render() {
         return (
-            <main className={`${roboto.className} ${firaCode.variable}`}>
+            <main className={`${roboto.className} ${firaCode.variable}`} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
                 <header>
                     <Link href="/">
                         <p>Welcome to</p>
@@ -32,12 +32,20 @@ export default class Page extends Component {
                     </Link>
                 </header>
 
-                <section>
+                <section style={{ flex: 1 }}>
                     {this.props.children}
                 </section>
 
                 <footer>
+                    <Link href="/subscribe">Subscribe to my newsletters!</Link>
+
                     <div className="footer-links">
+                        <a className="footer-link-stack-overflow" href="https://stackoverflow.com/users/20073186/nora-s%c3%b6derlund" target="_blank" rel="noreferrer">
+                            <Icon icon={Icons.fabStackOverflow}/>
+
+                            <span className="print-only">Nora Söderlund</span>
+                        </a>
+
                         <a className="footer-link-linkedin" href="https://www.linkedin.com/in/nora-soderlund/" target="_blank" rel="noreferrer">
                             <Icon icon={Icons.fabLinkedin}/>
 
@@ -48,12 +56,6 @@ export default class Page extends Component {
                             <Icon icon={Icons.fabGithub}/>
 
                             <span className="print-only">nora-soderlund</span>
-                        </a>
-                        
-                        <a className="footer-link-stack-overflow" href="https://stackoverflow.com/users/20073186/nora-s%c3%b6derlund" target="_blank" rel="noreferrer">
-                            <Icon icon={Icons.fabStackOverflow}/>
-
-                            <span className="print-only">Nora Söderlund</span>
                         </a>
                     </div>
                 </footer>
