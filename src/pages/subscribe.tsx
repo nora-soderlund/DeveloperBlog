@@ -9,6 +9,8 @@ import Article from "Components/Article";
 import API from "Services/API";
 import Link from "next/link";
 import { Router, withRouter } from "next/router";
+import ProgrammerNetworkIcon from "Components/ProgrammerNetworkIcon";
+import ProgrammerNetworkLink from "Components/ProgrammerNetworkLink";
 
 type SubscribePageProps = {
     router: Router;
@@ -118,6 +120,28 @@ export default withRouter(class SubscribePage extends Component<SubscribePagePro
                             <button style={{ marginLeft: "auto" }}>Submit</button>
                         </fieldset>
                     </form>
+                    
+                    <section>
+                        <h2>What can I expect?</h2>
+
+                        <p>This is the type of emails you can expect:</p>
+
+                        <ul>
+                            <li>Announcements of polished articles in my more popular tags</li>
+                            <li>Public or invite-only releases of my super cool projects</li>
+                            <li>Shoutouts to projects I contribute to like <ProgrammerNetworkLink/>!</li>
+                        </ul>
+
+                        <p>I will never send any kind of spam and I will never share your email. Each email will be personally addressed with no CCs or BCCs.</p>
+                    </section>
+                    
+                    <section>
+                        <h2>How do I unsubscribe?</h2>
+
+                        <p>In every email I send, there will be a link in the bottom for you to unsubscribe at ease - without any sort of hassle or magic tricks.</p>
+                        
+                        <p>I know how annoying it is when unsubscribe buttons are hidden and behind trick buttons...</p>
+                    </section>
                 </Page>
             </>
         );

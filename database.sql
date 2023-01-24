@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
--- Host:                         135.125.200.162
--- Server version:               8.0.31 - MySQL Community Server - GPL
+-- Host:                         127.0.0.1
+-- Server version:               8.0.30 - MySQL Community Server - GPL
 -- Server OS:                    Win64
 -- HeidiSQL Version:             12.0.0.6468
 -- --------------------------------------------------------
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `article_feedback` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
--- Dumping data for table developer_blog.article_feedback: ~2 rows (approximately)
+-- Dumping data for table developer_blog.article_feedback: ~3 rows (approximately)
 INSERT INTO `article_feedback` (`id`, `article`, `remoteAddress`, `positive`, `timestamp`) VALUES
 	(65, 1, '::ffff:162.158.222.254', 1, 1673192785720),
 	(66, 4, '::ffff:162.158.222.131', 1, 1673192885487),
@@ -88,6 +88,19 @@ INSERT INTO `codes` (`id`, `language`, `code`) VALUES
 	(3, 'javascript', 'if(number !== null) {\r\n    throw new Error("Number is null!");\r\n}\r\n\r\nif(number <= 0 || number >= 100) {\r\n    throw new Error("Number is out of bounds!");\r\n}\r\n'),
 	(4, 'batch', 'set="GENERATE_SOURCEMAP=false" && react-scripts build'),
 	(5, 'html', '<iframe src="https://www.google.com/maps/embed/v1/place?key=API_KEY&q=Space+Needle,Seattle+WA"></iframe>');
+
+-- Dumping structure for table developer_blog.subscriptions
+CREATE TABLE IF NOT EXISTS `subscriptions` (
+  `id` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
+  `firstname` varchar(255) COLLATE utf8mb4_swedish_ci DEFAULT NULL,
+  `inactivity` int NOT NULL DEFAULT '0',
+  `timestamp` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+-- Dumping data for table developer_blog.subscriptions: ~0 rows (approximately)
 
 -- Dumping structure for table developer_blog.tags
 CREATE TABLE IF NOT EXISTS `tags` (
