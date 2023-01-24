@@ -78,6 +78,9 @@ export default withRouter(class SubscribePage extends Component<SubscribePagePro
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                     <title>Subscribe - Nora Söderlund's Developer Blog</title>
 
+                    <meta name="author" content="Nora Söderlund"/>
+                    <meta name="theme-color" content="#1A202C"/>
+
                     <meta name="description" content="Welcome to my developer blog! I post articles surrondering the Google Maps Platform and other areas I'm passionate about! You can find me on LinkedIn: Nora Söderlund" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
 

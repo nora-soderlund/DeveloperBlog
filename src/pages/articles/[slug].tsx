@@ -107,9 +107,10 @@ class ArticlePage extends Component<ArticlePageProps, ArticlePageState> {
                     <title>{`${this.props.meta.title} - Nora Söderlund's Developer Blog`}</title>
 
                     <meta name="author" content="Nora Söderlund"/>
+                    <meta name="theme-color" content="#1A202C"/>
+                    
                     <meta name="description" content={this.props.meta.description}/>
                     <meta name="keywords" content={this.props.meta.tags.join(',')}/>
-                    <meta name="theme-color" content="#1A202C"/>
                     <meta name="viewport" content="width=device-width, initial-scale=1"/>
                     
                     <meta property="og:title" content={`${this.props.meta.title}`}/>
