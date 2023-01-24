@@ -124,7 +124,7 @@ export default withRouter(class SubscribePage extends Component<SubscribePagePro
                         </fieldset>
                     </form>
                     
-                    <section>
+                    <section style={{ marginBottom: "4em" }}>
                         <h2>What can I expect?</h2>
 
                         <p>This is the type of emails you can expect:</p>
@@ -138,7 +138,7 @@ export default withRouter(class SubscribePage extends Component<SubscribePagePro
                         <p>I will never send any kind of spam and I will never share your email. Each email will be personally addressed with no CCs or BCCs.</p>
                     </section>
                     
-                    <section>
+                    <section style={{ marginBottom: "4em" }}>
                         <h2>How do I unsubscribe?</h2>
 
                         <p>In every email I send, there will be a link in the bottom for you to unsubscribe at ease - without any sort of hassle or magic tricks.</p>
