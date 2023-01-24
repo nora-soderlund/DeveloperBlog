@@ -117,6 +117,8 @@ class ArticlePage extends Component<ArticlePageProps, ArticlePageState> {
                     <meta property="og:type" content="article"/>
                     <meta property="og:url" content={`https://nora-soderlund.se/articles/${this.props.slug}`}/>
                     <meta property="og:image" content={`https://nora-soderlund.se/api/v1/articles/${this.props.slug}/thumbnail.png`}/>
+                    <meta property="og:image:width" content="1200"/>
+                    <meta property="og:image:height" content="630"/>
 
                     <meta property="og:article:published_time" content={new Date(this.props.meta.timestamp).toISOString()}/>
                     <meta property="og:article:section" content="Programming"/>
