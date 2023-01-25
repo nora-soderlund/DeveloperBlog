@@ -46,13 +46,13 @@ export default class IndexPage extends Component<IndexPageProps, IndexPageState>
 
                 <Page>
                     {(this.state?.articles)?(
-                        <>
-                            {this.state?.articles.map((data) => (
-                                <Article key={data?.article.slug} data={data} compact={true}/>
-                            ))}
-                        </>
+                        this.state?.articles.map((data) => (
+                            <Article key={data?.article.slug} data={data} compact={true}/>
+                        ))
                     ):(
-                        <Article/>
+                        Array(3).fill(null).map((_, index) => (
+                            <Article key={index} compact={true}/>
+                        ))
                     )}
                 </Page>
             </>
