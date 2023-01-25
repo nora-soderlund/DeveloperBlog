@@ -4,6 +4,7 @@ import { Fira_Code, Roboto } from "@next/font/google";
 
 import Icons, { Icon } from "./Icons";
 import Notifications from "./Notifications";
+import Head from "next/head";
 
 const roboto = Roboto({
     style: [ "normal", "italic" ],
@@ -23,45 +24,60 @@ const firaCode = Fira_Code({
 export default class Page extends Component {
     render() {
         return (
-            <main className={`${roboto.className} ${firaCode.variable}`} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-                <header>
-                    <Link href="/">
-                        <p>Welcome to</p>
-                        <h1>Nora Söderlund&apos;s</h1>
-                        <p>developer blog!</p>
-                    </Link>
-                </header>
+            <>
+                <Head>
+                    {/* eslint-disable-next-line react/no-unescaped-entities */}
+                    <title>Nora Söderlund's Developer Blog</title>
 
-                <section style={{ flex: 1 }}>
-                    {this.props.children}
-                </section>
+                    <meta name="author" content="Nora Söderlund"/>
+                    <meta name="theme-color" content="#1A202C"/>
 
-                <footer>
-                    <Link href="/subscribe">Subscribe to my newsletters!</Link>
+                    <meta name="description" content="Welcome to my developer blog! I post articles surrondering the Google Maps Platform and other areas I'm passionate about! You can find me on LinkedIn: Nora Söderlund" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-                    <div className="footer-links">
-                        <a className="footer-link-stack-overflow" href="https://stackoverflow.com/users/20073186/nora-s%c3%b6derlund" target="_blank" rel="noreferrer">
-                            <Icon icon={Icons.fabStackOverflow}/>
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
 
-                            <span className="print-only">Nora Söderlund</span>
-                        </a>
+                <main className={`${roboto.className} ${firaCode.variable}`} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                    <header>
+                        <Link href="/">
+                            <p>Welcome to</p>
+                            <h1>Nora Söderlund&apos;s</h1>
+                            <p>developer blog!</p>
+                        </Link>
+                    </header>
 
-                        <a className="footer-link-linkedin" href="https://www.linkedin.com/in/nora-soderlund/" target="_blank" rel="noreferrer">
-                            <Icon icon={Icons.fabLinkedin}/>
+                    <section style={{ flex: 1 }}>
+                        {this.props.children}
+                    </section>
 
-                            <span className="print-only">Nora Söderlund</span>
-                        </a>
+                    <footer>
+                        <Link href="/subscribe">Subscribe to my newsletters!</Link>
 
-                        <a className="footer-link-github" href="https://github.com/nora-soderlund" target="_blank" rel="noreferrer">
-                            <Icon icon={Icons.fabGithub}/>
+                        <div className="footer-links">
+                            <a className="footer-link-stack-overflow" href="https://stackoverflow.com/users/20073186/nora-s%c3%b6derlund" target="_blank" rel="noreferrer">
+                                <Icon icon={Icons.fabStackOverflow}/>
 
-                            <span className="print-only">nora-soderlund</span>
-                        </a>
-                    </div>
-                </footer>
+                                <span className="print-only">Nora Söderlund</span>
+                            </a>
 
-                <Notifications/>
-            </main>
+                            <a className="footer-link-linkedin" href="https://www.linkedin.com/in/nora-soderlund/" target="_blank" rel="noreferrer">
+                                <Icon icon={Icons.fabLinkedin}/>
+
+                                <span className="print-only">Nora Söderlund</span>
+                            </a>
+
+                            <a className="footer-link-github" href="https://github.com/nora-soderlund" target="_blank" rel="noreferrer">
+                                <Icon icon={Icons.fabGithub}/>
+
+                                <span className="print-only">nora-soderlund</span>
+                            </a>
+                        </div>
+                    </footer>
+
+                    <Notifications/>
+                </main>
+            </>
         );
     };
 };

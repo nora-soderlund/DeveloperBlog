@@ -10,7 +10,7 @@ export default class Articles {
 
         const { error, row } = await Database.querySingleAsync(connection, `SELECT id, slug, title, short, content, network, timestamp FROM articles WHERE slug = ${connection.escape(slug)}`);
         
-        connection.release();
+        connection.destroy();
         
         if(error) {
             console.error(`Fatally failed to get article by slug: ${slug} (code: ${error.code})`);
@@ -43,7 +43,7 @@ export default class Articles {
 
         const { error, row } = await Database.querySingleAsync(connection, `SELECT id, slug, title, description, timestamp FROM articles WHERE slug = ${connection.escape(slug)}`);
         
-        connection.release();
+        connection.destroy();
 
         if(error) {
             console.error(`Fatally failed to get article by slug: ${slug} (code: ${error.code})`);
@@ -76,7 +76,7 @@ export default class Articles {
         
         const { error, rows } = await Database.queryAsync(connection, `SELECT tag FROM article_tags WHERE article = ${connection.escape(article.id)}`);
 
-        connection.release();
+        connection.destroy();
 
         if(error) {
             console.error(`Fatally failed to get article tags by id: ${article.id} (code: ${error.code})`);
@@ -104,7 +104,7 @@ export default class Articles {
             LIMIT ${limit}
         `);
 
-        connection.release();
+        connection.destroy();
 
         if(error) {
             console.error(`Fatally failed to get articles pagination: start ${start} limit ${limit} slug ${slug} (code: ${error.code})`);
@@ -120,7 +120,7 @@ export default class Articles {
         
         const { error, row } = await Database.querySingleAsync(connection, `SELECT positive FROM article_feedback WHERE article = ${connection.escape(article.id)} AND remoteAddress = ${connection.escape(remoteAddress)}`);
 
-        connection.release();
+        connection.destroy();
 
         if(error) {
             console.error(`Fatally failed to get article feedback by id ${article.id} and remote address ${remoteAddress} (code: ${error.code})`);
@@ -145,7 +145,7 @@ export default class Articles {
 
             const { error, row } = await Database.querySingleAsync(connection, `DELETE FROM article_feedback WHERE article = ${connection.escape(article.id)} AND remoteAddress = ${connection.escape(remoteAddress)}`);
     
-            connection.release();
+            connection.destroy();
 
             if(error) {
                 console.error(`Fatally failed to delete article feedback by id ${article.id}, remote address ${remoteAddress} (code: ${error.code})`);
@@ -161,7 +161,7 @@ export default class Articles {
 
             const { error, row } = await Database.querySingleAsync(connection, `INSERT INTO article_feedback (article, remoteAddress, positive, timestamp) VALUES (${connection.escape(article.id)}, ${connection.escape(remoteAddress)}, ${feedback}, ${Date.now()})`);
 
-            connection.release();
+            connection.destroy();
 
             if(error) {
                 console.error(`Fatally failed to create article feedback by id ${article.id}, remote address ${remoteAddress}, and feedback ${feedback} (code: ${error.code})`);
@@ -176,7 +176,7 @@ export default class Articles {
 
         const { error, row } = await Database.querySingleAsync(`UPDATE article_feedback SET positive = ${connection.escape(feedback)}, timestamp = ${connection.escape(Date.now())} WHERE article = ${connection.escape(article.id)} AND remoteAddress = ${connection.escape(remoteAddress)}`);
 
-        connection.release();
+        connection.destroy();
 
         if(error) {
             console.error(`Fatally failed to update article feedback by id ${article.id}, remote address ${remoteAddress}, and feedback ${feedback} (code: ${error.code})`);

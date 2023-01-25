@@ -8,7 +8,7 @@ export default class Codes {
         
         const { error, row } = await Database.querySingleAsync(`SELECT id, language, code FROM codes WHERE id = ${connection.escape(id)}`);
         
-        connection.release();
+        connection.destroy();
 
         if(error) {
             console.error(`Fatally failed to get code by id: ${id} (code: ${error.code})`);

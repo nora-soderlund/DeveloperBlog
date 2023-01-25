@@ -102,16 +102,12 @@ class ArticlePage extends Component<ArticlePageProps, ArticlePageState> {
 
     render() {
         return (
-            <>
+            <Page>
                 <Head>
                     <title>{`${this.props.meta.title} - Nora Söderlund's Developer Blog`}</title>
 
-                    <meta name="author" content="Nora Söderlund"/>
-                    <meta name="theme-color" content="#1A202C"/>
-                    
                     <meta name="description" content={this.props.meta.description}/>
                     <meta name="keywords" content={this.props.meta.tags.join(',')}/>
-                    <meta name="viewport" content="width=device-width, initial-scale=1"/>
                     
                     <meta property="og:title" content={`${this.props.meta.title}`}/>
                     <meta property="og:description" content={this.props.meta.description}/>
@@ -127,18 +123,14 @@ class ArticlePage extends Component<ArticlePageProps, ArticlePageState> {
                         <meta key={tag} property="og:article:tag" content={tag}/>
                     ))}
                     <meta property="og:article:author" content="https://nora-soderlund.se/og/author"/>
-
-                    <link rel="icon" href="/favicon.ico" />
                 </Head>
 
-                <Page>
-                    {(this.state?.data)?(
-                        <Article data={this.state.data}/>
-                    ):(
-                        <Article/>
-                    )}
-                </Page>
-            </>
+                {(this.state?.data)?(
+                    <Article data={this.state.data}/>
+                ):(
+                    <Article/>
+                )}
+            </Page>
         );
     };
 };

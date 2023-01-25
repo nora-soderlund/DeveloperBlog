@@ -10,28 +10,18 @@ import Link from "next/link";
 export default class SubscribePage extends Component {
     render() {
         return (
-            <>
+            <Page>
                 <Head>
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                     <title>Thank you - Nora Söderlund's Developer Blog</title>
-
-                    <meta name="author" content="Nora Söderlund"/>
-                    <meta name="theme-color" content="#1A202C"/>
-
-                    <meta name="description" content="Welcome to my developer blog! I post articles surrondering the Google Maps Platform and other areas I'm passionate about! You can find me on LinkedIn: Nora Söderlund" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-                    <link rel="icon" href="/favicon.ico" />
                 </Head>
 
-                <Page>
-                    <h2>Thank you!</h2>
+                <h2>Thank you!</h2>
 
-                    <p>Thank you for subscribing to my news letter. You can at any time unsubscribe through the link that is sent in every email.</p>
+                <p>Thank you for subscribing to my news letter. You can at any time unsubscribe through the link that is sent in every email.</p>
 
-                    <p><Link href="/">Return to home page.</Link></p>
-                </Page>
-            </>
+                <p><Link href="/">Return to home page.</Link></p>
+            </Page>
         );
     };
 };

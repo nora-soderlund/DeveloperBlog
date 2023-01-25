@@ -32,7 +32,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
 
     await Database.queryAsync(connection, `INSERT INTO subscriptions (id, email, firstname, inactivity, timestamp) VALUES (${connection.escape(id)}, ${connection.escape(body.email)}, ${((body.firstname.length)?(connection.escape(body.firstname)):("NULL"))}, ${connection.escape(inactivity)}, ${connection.escape(Date.now())})`)
 
-    connection.release();
+    connection.destroy();
 
     response.status(200).json({});
 };

@@ -73,80 +73,70 @@ export default withRouter(class SubscribePage extends Component<SubscribePagePro
     
     render() {
         return (
-            <>
+            <Page>
                 <Head>
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                     <title>Subscribe - Nora Söderlund's Developer Blog</title>
-
-                    <meta name="author" content="Nora Söderlund"/>
-                    <meta name="theme-color" content="#1A202C"/>
-
-                    <meta name="description" content="Welcome to my developer blog! I post articles surrondering the Google Maps Platform and other areas I'm passionate about! You can find me on LinkedIn: Nora Söderlund" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-                    <link rel="icon" href="/favicon.ico" />
                 </Head>
 
-                <Page>
-                    <section style={{ marginBottom: "4em" }}>
-                        <h2>What can I expect?</h2>
+                <section style={{ marginBottom: "4em" }}>
+                    <h2>What can I expect?</h2>
 
-                        <p>This is the type of emails you can expect:</p>
+                    <p>This is the type of emails you can expect:</p>
 
-                        <ul>
-                            <li>Announcements of polished articles in my more popular tags</li>
-                            <li>Public or invite-only releases of my super cool projects</li>
-                            <li>Shoutouts to projects I contribute to like <ProgrammerNetworkLink/>!</li>
-                        </ul>
+                    <ul>
+                        <li>Announcements of polished articles in my more popular tags</li>
+                        <li>Public or invite-only releases of my super cool projects</li>
+                        <li>Shoutouts to projects I contribute to like <ProgrammerNetworkLink/>!</li>
+                    </ul>
 
-                        <p>I will never send any kind of spam and I will never share your email.</p>
-                    </section>
+                    <p>I will never send any kind of spam and I will never share your email.</p>
+                </section>
 
-                    <form onSubmit={this.submit.bind(this)} style={{ marginBottom: "4em" }}>
-                        <h2>Subscribe</h2>
+                <form onSubmit={this.submit.bind(this)} style={{ marginBottom: "4em" }}>
+                    <h2>Subscribe</h2>
 
-                        <p>Thank you for wanting to subscribe to my developer blog! You can unsubscribe at any time very easily by clicking on a link in the footer of my emails.</p>
+                    <p>Thank you for wanting to subscribe to my developer blog! You can unsubscribe at any time very easily by clicking on a link in the footer of my emails.</p>
 
-                        <fieldset>
+                    <fieldset>
 
-                            <div style={{ display: "flex", flex: 1, flexDirection: "column", marginBottom: "auto" }}>
-                                <input name="firstname" type="text" placeholder="Firstname (optional)" autoCapitalize={"true"} autoComplete="given-name"/>
+                        <div style={{ display: "flex", flex: 1, flexDirection: "column", marginBottom: "auto" }}>
+                            <input name="firstname" type="text" placeholder="Firstname (optional)" autoCapitalize={"true"} autoComplete="given-name"/>
 
-                                <label className="form-error" htmlFor="firstname"></label>
-                            </div>
+                            <label className="form-error" htmlFor="firstname"></label>
+                        </div>
 
-                            <div style={{ display: "flex", flex: 1, flexDirection: "column", marginBottom: "auto" }}>
-                                <input name="email" type="email" placeholder="Email address" autoComplete="email"/>
+                        <div style={{ display: "flex", flex: 1, flexDirection: "column", marginBottom: "auto" }}>
+                            <input name="email" type="email" placeholder="Email address" autoComplete="email"/>
 
-                                <label className="form-error" htmlFor="email"></label>
-                            </div>
-                        </fieldset>
-                        
-                        <p><small>If it&apos;s detected that you have not followed one of the links in 6 months, your email address will be deleted from the newsletter list. {!this.state?.showMore && (<Link href="/subscribe#show-more">Show more.</Link>)}</small></p>
-
-                        {this.state?.showMore && (
-                            <p><small>All emails are personally addressed to you and all blog links contain a <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank" rel="noreferrer">universally unique identifier</a> that is connected to your subscription. This is used to track when to remove your subscription automatically. <Link href="/subscribe">Show less.</Link></small></p>
-                        )}
-
-                        <fieldset style={{ alignItems: "baseline" }}>
-                            <div>
-                                <input name="inactivity" id="inactivity" type="checkbox" style={{ flex: "initial" }}/>
-                                <label htmlFor="inactivity"><small>Opt out and keep sending me emails until I unsubscribe.</small></label>
-                            </div>
-
-                            <button style={{ marginLeft: "auto" }}>Submit</button>
-                        </fieldset>
-                    </form>
+                            <label className="form-error" htmlFor="email"></label>
+                        </div>
+                    </fieldset>
                     
-                    <section style={{ marginBottom: "4em" }}>
-                        <h2>How do I unsubscribe?</h2>
+                    <p><small>If it&apos;s detected that you have not followed one of the links in 6 months, your email address will be deleted from the newsletter list. {!this.state?.showMore && (<Link href="/subscribe#show-more">Show more.</Link>)}</small></p>
 
-                        <p>In every email I send, there will be a link in the bottom for you to unsubscribe at ease - without any sort of hassle or magic tricks.</p>
-                        
-                        <p>I know how annoying it is when unsubscribe buttons are hidden and behind trick buttons... alas, none of that!</p>
-                    </section>
-                </Page>
-            </>
+                    {this.state?.showMore && (
+                        <p><small>All emails are personally addressed to you and all blog links contain a <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank" rel="noreferrer">universally unique identifier</a> that is connected to your subscription. This is used to track when to remove your subscription automatically. <Link href="/subscribe">Show less.</Link></small></p>
+                    )}
+
+                    <fieldset style={{ alignItems: "baseline" }}>
+                        <div>
+                            <input name="inactivity" id="inactivity" type="checkbox" style={{ flex: "initial" }}/>
+                            <label htmlFor="inactivity"><small>Opt out and keep sending me emails until I unsubscribe.</small></label>
+                        </div>
+
+                        <button style={{ marginLeft: "auto" }}>Submit</button>
+                    </fieldset>
+                </form>
+                
+                <section style={{ marginBottom: "4em" }}>
+                    <h2>How do I unsubscribe?</h2>
+
+                    <p>In every email I send, there will be a link in the bottom for you to unsubscribe at ease - without any sort of hassle or magic tricks.</p>
+                    
+                    <p>I know how annoying it is when unsubscribe buttons are hidden and behind trick buttons... alas, none of that!</p>
+                </section>
+            </Page>
         );
     };
 });

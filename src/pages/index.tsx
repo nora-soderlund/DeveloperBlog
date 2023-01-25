@@ -1,5 +1,4 @@
 import { Component } from "react";
-import Head from "next/head";
 
 import { ArticleResponse, ArticlesResponse } from "Types/Responses";
 
@@ -30,32 +29,17 @@ export default class IndexPage extends Component<IndexPageProps, IndexPageState>
 
     render() {
         return (
-            <>
-                <Head>
-                    {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    <title>Nora Söderlund's Developer Blog</title>
-
-                    <meta name="author" content="Nora Söderlund"/>
-                    <meta name="theme-color" content="#1A202C"/>
-
-                    <meta name="description" content="Welcome to my developer blog! I post articles surrondering the Google Maps Platform and other areas I'm passionate about! You can find me on LinkedIn: Nora Söderlund" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-                    <link rel="icon" href="/favicon.ico" />
-                </Head>
-
-                <Page>
-                    {(this.state?.articles)?(
-                        this.state?.articles.map((data) => (
-                            <Article key={data?.article.slug} data={data} compact={true}/>
-                        ))
-                    ):(
-                        Array(3).fill(null).map((_, index) => (
-                            <Article key={index} compact={true}/>
-                        ))
-                    )}
-                </Page>
-            </>
+            <Page>
+                {(this.state?.articles)?(
+                    this.state?.articles.map((data) => (
+                        <Article key={data?.article.slug} data={data} compact={true}/>
+                    ))
+                ):(
+                    Array(3).fill(null).map((_, index) => (
+                        <Article key={index} compact={true}/>
+                    ))
+                )}
+            </Page>
         );
     };
 };

@@ -8,7 +8,7 @@ export default class Tags {
         
         const { error, rows } = await Database.queryAsync(connection, `SELECT slug, text, icon, shimmer, color FROM tags WHERE (${ids.map((id) => `id = ${connection.escape(id)}`).join(" OR ")}) ORDER BY priority DESC`);
         
-        connection.release();
+        connection.destroy();
 
         if(error) {
             console.error(`Fatally failed to get tags by ids: ${ids.join()} (code: ${error.code})`);
