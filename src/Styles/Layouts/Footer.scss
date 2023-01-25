@@ -3,7 +3,9 @@ footer {
 
     color: $color;
 
-    padding-bottom: .5em;
+    padding-bottom: 1em;
+
+    align-items: center;
 
     a {
         &:hover {

@@ -6,13 +6,21 @@ form {
     }
 
     fieldset {
-        display: flex;
-    
+        display: grid;
+
+        grid-auto-flow: column;
+
         padding-right: 6em;
     
         gap: 1em;
 
         border: none;
+
+        @media screen and (max-width: 600px) {
+            grid-auto-flow: row;
+
+            padding-right: 0;
+        }
     }
 
     .form-error {

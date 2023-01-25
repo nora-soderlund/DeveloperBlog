@@ -1,12 +1,22 @@
 header {
-    width: min-content;
+    
+    svg {
+        fill: $color;
 
-    font-size: 1.7em;
+        .small {
+            font-size: 10px;
+        }
 
-    margin: 0 auto 3rem;
+        .large {
+            fill: #FFF;
+
+            font-size: 30px;
+            font-weight: 500;
+        }
+    }
 
     h1 {
-        width: max-content;
+        max-width: max-content;
     }
 
     p {

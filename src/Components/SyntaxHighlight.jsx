@@ -30,7 +30,7 @@ export default class SyntaxHighlight {
                     this.classList.remove("shimmer");
                 }
                 else if(this.innerHTML.length != 0) {
-                    this.innerHTML = this.innerHTML.replaceAll('<', '&lt;').replaceAll('>', '&rt;');
+                    this.innerHTML = this.innerHTML.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
                     let body = this.textContent.replaceAll(/^(?:[\t ]*(?:\r?\n|\r))+/gm, "").split('\n');
 

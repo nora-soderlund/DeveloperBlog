@@ -100,13 +100,13 @@ export default withRouter(class SubscribePage extends Component<SubscribePagePro
 
                     <fieldset>
 
-                        <div style={{ display: "flex", flex: 1, flexDirection: "column", marginBottom: "auto" }}>
+                        <div style={{ display: "flex", flexDirection: "column", marginBottom: "auto" }}>
                             <input name="firstname" type="text" placeholder="Firstname (optional)" autoCapitalize={"true"} autoComplete="given-name"/>
 
                             <label className="form-error" htmlFor="firstname"></label>
                         </div>
 
-                        <div style={{ display: "flex", flex: 1, flexDirection: "column", marginBottom: "auto" }}>
+                        <div style={{ display: "flex", flexDirection: "column", marginBottom: "auto" }}>
                             <input name="email" type="email" placeholder="Email address" autoComplete="email"/>
 
                             <label className="form-error" htmlFor="email"></label>

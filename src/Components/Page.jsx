@@ -41,9 +41,14 @@ export default class Page extends Component {
                 <main className={`${roboto.className} ${firaCode.variable}`} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
                     <header>
                         <Link href="/">
-                            <p>Welcome to</p>
-                            <h1>Nora Söderlund&apos;s</h1>
-                            <p>developer blog!</p>
+                            <svg viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+                                <text x="6" y="14" class="small" alignmentBaseline="hanging">Welcome to</text>
+
+                                {/*eslint-disable-next-line react/no-unescaped-entities*/}
+                                <text x="120" y="40" class="large" alignmentBaseline="central" textAnchor="middle">Nora Söderlund's</text>
+                                
+                                <text x="234" y="66" class="small" alignmentBaseline="ideographic" textAnchor="end">developer blog!</text>
+                            </svg>
                         </Link>
                     </header>
 

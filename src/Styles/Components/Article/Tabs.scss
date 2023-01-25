@@ -6,8 +6,15 @@
 
         gap: 2em;
 
+        overflow-x: auto;
+        padding-top: .5em;
+
+        padding-right: .4em;
+
         .article-tab {
             padding: 0 0 .4em;
+
+            white-space: nowrap;
 
             &.active {
                 border-bottom: 2px solid $color;
