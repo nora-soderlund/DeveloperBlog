@@ -6,6 +6,7 @@ export type GithubNotification = {
     subject_url: string;
     subject_type: string;
     repository_name: string;
+    repository_full_name: string;
     repository_description: string;
     repository_url: string;
     repository_owner_avatar: string;

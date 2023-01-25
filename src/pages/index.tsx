@@ -65,7 +65,7 @@ export default class IndexPage extends Component<IndexPageProps, IndexPageState>
                                         <img alt={notification.repository_name} src={notification.repository_owner_avatar}/>
                                     </Link>
 
-                                    <Link href={notification.subject_url} className={style.name} title={notification.repository_name}>{notification.repository_name.substring(notification.repository_name.indexOf('/') + 1, notification.repository_name.length)}</Link>
+                                    <Link href={notification.subject_url} className={style.name} title={notification.repository_full_name}>{notification.repository_name}</Link>
                                 </div>
 
                                 <p className={style.title} title={notification.subject_title}>{notification.subject_title}</p>
