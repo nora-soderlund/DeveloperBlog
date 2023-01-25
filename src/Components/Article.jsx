@@ -10,6 +10,7 @@ import Icons, { Icon, IconNames } from "./Icons";
 import ProgrammerNetworkLink from "./ProgrammerNetworkLink";
 import SyntaxHighlight from "./SyntaxHighlight";
 import API from "Services/API";
+import ProgrammerNetworkIcon from "./ProgrammerNetworkIcon";
 
 export default class Article extends Component {
     componentDidUpdate() {
@@ -98,7 +99,7 @@ export default class Article extends Component {
 
                     {(this.props.compact && article.network) && (
                         <div className="article-tags-links">
-                            <ProgrammerNetworkLink href={article.network} text={null}/>
+                            <Link href={article.network} rel="noreferrer" target="_blank"><ProgrammerNetworkIcon/></Link>
                         </div>
                     )}
                 </div>
