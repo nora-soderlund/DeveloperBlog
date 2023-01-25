@@ -2,6 +2,13 @@ img {
     max-width: 100%;
 }
 
+object {
+    max-width: 100%;
+    
+    font-family: inherit;
+    font-size: inherit;
+}
+
 .article-image {
     width: 100%;
 
