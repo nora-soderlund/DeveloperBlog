@@ -34,11 +34,11 @@ export default class SyntaxHighlight {
 
                     let body = this.textContent.replaceAll(/^(?:[\t ]*(?:\r?\n|\r))+/gm, "").split('\n');
 
+
                     let index = 0;
-                    for(; index < body[0].length; index++) {
-                        if(body[0][index] != ' ')
-                            break;
-                    }
+
+                    while(body[0][index] == ' ' && index < body[0].length)
+                        index++;
 
                     if(index > 0)
                         body = body.map((line) => line.substring(index, line.length));
