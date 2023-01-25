@@ -1,3 +1,4 @@
+import { GithubNotification } from "Types";
 import { ArticleResponse, ArticlesResponse, CodeResponse } from "Types/Responses";
 
 export default class API {
@@ -9,6 +10,13 @@ export default class API {
             searchParams.append("tag", tag);
 
         const response = await fetch(`/api/v1/articles?${searchParams.toString()}`);
+        const result = await response.json();
+
+        return result;
+    };
+
+    static async getGithubNotifications(): Promise<GithubNotification[]> {
+        const response = await fetch(`/api/v1/github`);
         const result = await response.json();
 
         return result;

@@ -1,0 +1,67 @@
+@import "../Base/Colors";
+
+.github {
+    display: grid;
+
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+
+    gap: 1em;
+
+    margin-bottom: 3rem;
+
+    overflow: hidden;
+
+    .notification {
+        background: rgba(13, 17, 23, .1);
+        border: 1px solid rgba(48, 54, 61, .5);
+        border-radius: .3em;
+
+        padding: .4em;
+
+        overflow: hidden;
+
+        .repository {
+            display: flex;
+
+            align-items: center;
+
+            gap: .2em;
+
+            .image {
+                width: 1.2em;
+                height: 1.2em;
+    
+                overflow: hidden;
+    
+                img {
+                    width: 100%;
+                }
+            }
+
+            .name {
+                margin-block: 0;
+
+                font-size: .8em;
+
+                white-space: nowrap;
+            }
+        }
+
+        .title {
+            font-size: .7em;
+
+            margin-block: .4em;
+
+            white-space: nowrap;
+
+            text-overflow: ellipsis;
+
+            overflow: hidden;
+        }
+
+        .time {
+            font-size: .6em;
+        }
+    }
+}
