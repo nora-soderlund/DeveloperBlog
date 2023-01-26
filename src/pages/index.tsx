@@ -28,7 +28,7 @@ export default class IndexPage extends Component<IndexPageProps, IndexPageState>
         API.getArticleSlugsByPagination(0, this.props.tag).then((pagination: ArticlesResponse | null) => {
             if(pagination === null)
                 return;
-    
+   
             Promise.all(pagination.articles.map(async (slug) => await API.getArticleBySlug(slug))).then((articles: (ArticleResponse | null)[]) => {
                 this.setState({
                     articles

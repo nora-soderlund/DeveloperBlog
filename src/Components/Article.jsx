@@ -50,10 +50,15 @@ export default class Article extends Component {
                     </p>
                     
                     <p className="shimmer">
-                        <span className="shimmer-content">Lorem ipsum; didum lip. Lorem ipsum; didum lip. Lorem ipsum; didum lip. Lorem ipsum; didum lip.</span>
+                        <span className="shimmer-content">Lorem ipsum; didum lip. Lorem ipsum; didum lip.</span>
                     </p>
 
-                    <span className="shimmer"></span>
+                    <div className="article-tags">
+                        <div className="article-tags-content">
+                            <span className="article-tag article-tag-featured" style={{ color: "transparent", borderColor: "transparent" }}>A bit longer</span>
+                            <span className="article-tag article-tag-featured" style={{ color: "transparent", borderColor: "transparent" }}>Shimmer</span>
+                        </div>
+                    </div>
                 </article>
             );
         }
