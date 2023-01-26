@@ -12,6 +12,7 @@ import style from "Styles/Modules/index.module.scss";
 import Link from "next/link";
 import moment from "moment";
 import Image from "next/image";
+import Icons, { Icon } from "Components/Icons";
 
 type IndexPageProps = {
     tag: string | null
@@ -55,42 +56,53 @@ export default class IndexPage extends Component<IndexPageProps, IndexPageState>
                     ))
                 )}
 
-                <h4>My latest activity</h4>
+                {(!this.props.tag) && (
+                    <>
+                        <div className={style.title}>
+                            <h4 title="My latest GitHub activity by others.">My latest activity</h4>
 
-                <div className={style.github}>
-                    {(this.state?.github)?(
-                        this.state.github.map((notification) => (
-                            <div key={notification.id} className={style.notification}>
-                                <div className={style.repository}>
-                                    <Link href={notification.repository_url} className={style.image}>
-                                        <Image alt={notification.repository_name} src={notification.repository_owner_avatar} width={64} height={64}/>
-                                    </Link>
+                            <a className="footer-link-github" href="https://github.com/nora-soderlund" target="_blank" rel="noreferrer">
+                                <Icon icon={Icons.fabGithub}/>
 
-                                    <Link href={notification.subject_url} className={style.name} title={notification.repository_full_name}>{notification.repository_name}</Link>
-                                </div>
+                                <span className="print-only">nora-soderlund</span>
+                            </a>
+                        </div>
 
-                                <p className={style.title} title={notification.subject_title}>{notification.subject_title}</p>
+                        <div className={style.github}>
+                            {(this.state?.github)?(
+                                this.state.github.map((notification) => (
+                                    <div key={notification.id} className={style.notification}>
+                                        <div className={style.repository}>
+                                            <Link href={notification.repository_url} className={style.image}>
+                                                <Image alt={notification.repository_name} src={notification.repository_owner_avatar} width={64} height={64}/>
+                                            </Link>
 
-                                <small className={style.time}>{moment(notification.updated_at).fromNow()}</small>
-                            </div>
-                        ))
-                    ):(
-                        Array(3).fill(null).map((_, index) => (
-                            <div key={index} className={style.notification}>
-                                <div className={style.repository}>
-                                    <div className={`${style.image} shimmer`}></div>
+                                            <Link href={notification.subject_url} className={style.name} title={notification.repository_full_name}>{notification.repository_name}</Link>
+                                        </div>
 
-                                    <div className={`${style.name} shimmer`}></div>
-                                </div>
+                                        <p className={style.title} title={notification.subject_title}>{notification.subject_title}</p>
 
-                                <div className={`${style.title} shimmer`}></div>
+                                        <small className={style.time}>{moment(notification.updated_at).fromNow()}</small>
+                                    </div>
+                                ))
+                            ):(
+                                Array(3).fill(null).map((_, index) => (
+                                    <div key={index} className={style.notification}>
+                                        <div className={style.repository}>
+                                            <div className={`${style.image} shimmer`}></div>
 
-                                <small className={`${style.time} shimmer`}></small>
-                            </div>
-                        ))
-                    )}
-                </div>
+                                            <div className={`${style.name} shimmer`}></div>
+                                        </div>
 
+                                        <div className={`${style.title} shimmer`}></div>
+
+                                        <small className={`${style.time} shimmer`}></small>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </>
+                )}
 
                 {(this.state?.articles)?(
                     this.state?.articles.slice(1, this.state?.articles.length).map((data) => (

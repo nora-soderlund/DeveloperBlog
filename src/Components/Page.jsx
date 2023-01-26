@@ -42,12 +42,12 @@ export default class Page extends Component {
                     <header>
                         <Link href="/">
                             <svg viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
-                                <text x="6" y="14" class="small" alignmentBaseline="hanging">Welcome to</text>
+                                <text x="6" y="14" className="small" alignmentBaseline="hanging">Welcome to</text>
 
                                 {/*eslint-disable-next-line react/no-unescaped-entities*/}
-                                <text x="120" y="40" class="large" alignmentBaseline="central" textAnchor="middle">Nora Söderlund's</text>
+                                <text x="120" y="40" className="large" alignmentBaseline="central" textAnchor="middle">Nora Söderlund's</text>
                                 
-                                <text x="234" y="66" class="small" alignmentBaseline="ideographic" textAnchor="end">developer blog!</text>
+                                <text x="234" y="66" className="small" alignmentBaseline="ideographic" textAnchor="end">developer blog!</text>
                             </svg>
                         </Link>
                     </header>
@@ -57,7 +57,7 @@ export default class Page extends Component {
                     </section>
 
                     <footer>
-                        <Link href="/subscribe">Subscribe to my newsletters!</Link>
+                        <Link href="/subscribe" className="no-print">Subscribe to my newsletters!</Link>
 
                         <div className="footer-links">
                             <a className="footer-link-stack-overflow" href="https://stackoverflow.com/users/20073186/nora-s%c3%b6derlund" target="_blank" rel="noreferrer">

@@ -5,3 +5,9 @@
         display: initial;
     }
 }
+
+.no-print {
+    @media print {
+        display: none;
+    }
+}
