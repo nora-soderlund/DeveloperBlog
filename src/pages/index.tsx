@@ -11,6 +11,7 @@ import { GithubNotification } from "Types";
 import style from "Styles/Modules/index.module.scss";
 import Link from "next/link";
 import moment from "moment";
+import Image from "next/image";
 
 type IndexPageProps = {
     tag: string | null
@@ -62,7 +63,7 @@ export default class IndexPage extends Component<IndexPageProps, IndexPageState>
                             <div key={notification.id} className={style.notification}>
                                 <div className={style.repository}>
                                     <Link href={notification.repository_url} className={style.image}>
-                                        <img alt={notification.repository_name} src={notification.repository_owner_avatar}/>
+                                        <Image alt={notification.repository_name} src={notification.repository_owner_avatar} width={64} height={64}/>
                                     </Link>
 
                                     <Link href={notification.subject_url} className={style.name} title={notification.repository_full_name}>{notification.repository_name}</Link>
