@@ -69,7 +69,7 @@ export default class Article extends Component {
 
                 {(this.props?.compact)?(
                     <Link href={`/articles/${article.slug}`}>
-                        <h2 className="article-title">{article.title}</h2>
+                        <h1 className="article-title">{article.title}</h1>
                     </Link>
                 ):(
                     <h2 className="article-title article-title-link" onClick={() => copyLinkToClipboard(window.location.href.replace(window.location.hash, ""))}>
