@@ -28,6 +28,9 @@ export default class Article extends Component {
         if(!article.content.includes(SyntaxHighlight.name))
             return;
 
+        window.shiki = require("shiki");
+        window.shiki.setCDN("/_next/static/shiki/");
+
         customElements.define(SyntaxHighlight.name, SyntaxHighlight.execute());
     };
 

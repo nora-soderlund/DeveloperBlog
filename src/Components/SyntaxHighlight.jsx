@@ -48,14 +48,26 @@ export default class SyntaxHighlight {
 
                     this.innerHTML = `<pre><code></code></pre>`;
                     this.firstChild.firstChild.textContent = `${body.join('\n')}`;
-                    
-                    const code = await API.getCodeByBody(body.join('\n'), this.getAttribute("language"));
+                   
+                    if(!window.highlighter) {
+                        if(!window.highlighterPromise) {
+                            window.highlighterPromise = window.shiki.getHighlighter({
+                                langs: [ "html", "css", "javascript", "typescript", "batch" ],
+                                theme: "github-dark"
+                            });
+                        }
+
+                        window.highlighter = await window.highlighterPromise;
+                    }
+
+                    let html = window.highlighter.codeToHtml(body.join('\n'), { lang: this.getAttribute("language") });
+                    //const code = await API.getCodeByBody(body.join('\n'), this.getAttribute("language"));
 
                     replacements.forEach((item) => {
-                        code.html = code.html.replaceAll(item.expression, item.replacement.bind(this));
+                        html = html.replaceAll(item.expression, item.replacement.bind(this));
                     });
 
-                    this.innerHTML = code.html;
+                    this.innerHTML = html;
                 }
             };
         }

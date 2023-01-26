@@ -1,3 +1,6 @@
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
+
 /** @type {import('next').NextConfig} */
 module.exports = {
     reactStrictMode: true,
@@ -14,6 +17,17 @@ module.exports = {
     },
 
     webpack(config) {
+        config.plugins.push(
+          new CopyPlugin({
+            patterns: [
+              {
+                from: path.resolve(path.dirname(require.resolve("shiki")), ".."),
+                to: "static/shiki/",
+              },
+            ],
+          })
+        );
+      
         config.module.rules.push({
             test: /\.svg$/,
             use: ["@svgr/webpack"]
