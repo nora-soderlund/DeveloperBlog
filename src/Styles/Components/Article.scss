@@ -42,4 +42,18 @@ article {
     
         color: lighten($color, 25%);
     }
+
+    .article-vector {
+        width: 80%;
+        height: 100%;
+
+        margin: auto;
+
+        overflow: hidden;
+
+        .article-vector-grid {
+            margin-left: -1px;
+            margin-top: -1px;
+        }
+    }
 }

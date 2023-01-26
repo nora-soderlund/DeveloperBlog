@@ -32,7 +32,10 @@ export default class SyntaxHighlight {
                 else if(this.innerHTML.length != 0) {
                     this.innerHTML = this.innerHTML.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
-                    let body = this.textContent.replaceAll(/^(?:[\t ]*(?:\r?\n|\r))+/gm, "").split('\n');
+                    let body = this.textContent.split('\n');
+
+                    while(!body[0].length && body.length)
+                        body.splice(0, 1);
 
 
                     let index = 0;
