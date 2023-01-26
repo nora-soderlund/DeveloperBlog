@@ -59,7 +59,7 @@ export default class IndexPage extends Component<IndexPageProps, IndexPageState>
                 {(!this.props.tag) && (
                     <>
                         <div className={style.title}>
-                            <h4 title="My latest GitHub activity by others.">My latest activity</h4>
+                            <h4 title="My latest public activity on Github.">My latest activity</h4>
 
                             <a className="footer-link-github" href="https://github.com/nora-soderlund" target="_blank" rel="noreferrer">
                                 <Icon icon={Icons.fabGithub}/>
@@ -73,11 +73,11 @@ export default class IndexPage extends Component<IndexPageProps, IndexPageState>
                                 this.state.github.map((notification) => (
                                     <div key={notification.id} className={style.notification}>
                                         <div className={style.repository}>
-                                            <Link href={notification.repository_url} className={style.image}>
+                                            <Link href={notification.repository_url} target="_blank" rel="noreferrer" className={style.image}>
                                                 <Image alt={notification.repository_name} src={notification.repository_owner_avatar} width={64} height={64}/>
                                             </Link>
 
-                                            <Link href={notification.subject_url} className={style.name} title={notification.repository_full_name}>{notification.repository_name}</Link>
+                                            <Link href={notification.subject_url} target="_blank" rel="noreferrer" className={style.name} title={notification.repository_full_name}>{notification.repository_name}</Link>
                                         </div>
 
                                         <p className={style.title} title={notification.subject_title}>{notification.subject_title}</p>
