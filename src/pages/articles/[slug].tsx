@@ -109,13 +109,13 @@ class ArticlePage extends Component<ArticlePageProps, ArticlePageState> {
                     <meta name="description" content={this.props.meta.description}/>
                     <meta name="keywords" content={this.props.meta.tags.join(',')}/>
                     
+                    <meta property="og:site_name" content="Nora Söderlund's Developer Blog"/>
                     <meta property="og:title" content={`${this.props.meta.title}`}/>
                     <meta property="og:description" content={this.props.meta.description}/>
                     <meta property="og:type" content="article"/>
                     <meta property="og:url" content={`https://nora-soderlund.se/articles/${this.props.slug}`}/>
                     <meta property="og:image" content={`https://nora-soderlund.se/api/v1/articles/${this.props.slug}/thumbnail.png`}/>
-                    <meta property="og:image:width" content="1200"/>
-                    <meta property="og:image:height" content="630"/>
+                    <meta property="og:image:secure_url" content={`https://nora-soderlund.se/api/v1/articles/${this.props.slug}/thumbnail.png`}/>
 
                     <meta property="og:article:published_time" content={new Date(this.props.meta.timestamp).toISOString()}/>
                     <meta property="og:article:section" content="Programming"/>
@@ -123,6 +123,11 @@ class ArticlePage extends Component<ArticlePageProps, ArticlePageState> {
                         <meta key={tag} property="og:article:tag" content={tag}/>
                     ))}
                     <meta property="og:article:author" content="https://nora-soderlund.se/og/author"/>
+
+                    <meta name="twitter:card" content="summary_large_image"/>
+                    <meta name="twitter:description" content={this.props.meta.description}/>
+                    <meta name="twitter:title" content={`${this.props.meta.title}`}/>
+                    <meta name="twitter:image" content={`https://nora-soderlund.se/api/v1/articles/${this.props.slug}/thumbnail.png`}/>
                 </Head>
 
                 {(this.state?.data)?(
