@@ -1,0 +1,13 @@
+.map {
+    background: #2b3343;
+
+    height: 100%;
+
+    display: flex;
+
+    overflow: hidden;
+
+    .overlay {
+        padding: .5em 1em;
+    }
+}
