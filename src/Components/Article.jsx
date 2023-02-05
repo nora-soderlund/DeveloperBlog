@@ -112,7 +112,8 @@ export default class Article extends Component {
                     )}
                 </div>
 
-                {(!this.props.compact) && (
+                {/* TODO: disabled due to proxy issues */}
+                {/*(!this.props.compact) && (
                     <div className="article-feedback">
                         {(feedback === null)?(
                             <p>Was this article useful for you?</p>
@@ -130,7 +131,7 @@ export default class Article extends Component {
                             </div>
                         </div>
                     </div>
-                )}
+                )*/}
 
                 {(!this.props.compact && article.network) && (
                     <p className="article-network">
