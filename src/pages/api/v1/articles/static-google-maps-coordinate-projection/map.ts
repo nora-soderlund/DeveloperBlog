@@ -6,7 +6,7 @@ import GoogleMaps from "Services/GoogleMaps";
 import GoogleMapsLimitations from "Services/GoogleMapsLimitations";
 
 const size: [ number, number ] = [ 640, 360 ];
-const zoom: number = 16;
+const zoom: number = 14;
 
 export type MapRequest = {
     coordinates: [ number, number ] | null;
