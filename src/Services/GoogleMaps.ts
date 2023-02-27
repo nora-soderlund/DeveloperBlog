@@ -24,7 +24,7 @@ export default class GoogleMaps {
         url.searchParams.append("size", size.join('x'));
         url.searchParams.append("zoom", zoom.toString());
         url.searchParams.append("language", "SE-en");
-        url.searchParams.append("key", process.env.GOOGLE_MAPS_API_KEY as string);
+        url.searchParams.append("key", process.env.GOOGLE_MAPS_SERVER_API_KEY as string);
 
         GoogleMapsLimitations.log(url.toString());
 
