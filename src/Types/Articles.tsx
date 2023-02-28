@@ -7,6 +7,7 @@ export type Article = {
     short: string,
     content: string,
     network: string | null,
+    example: string | null,
     timestamp: number,
 
     tags: Tag[] | null

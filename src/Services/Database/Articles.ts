@@ -8,7 +8,7 @@ export default class Articles {
     static async getArticleBySlug(slug: string): Promise<Article | null> {
         const connection = await Database.ensureConnectionAsync();
 
-        const { error, row } = await Database.querySingleAsync(connection, `SELECT id, slug, title, short, content, network, timestamp FROM articles WHERE slug = ${connection.escape(slug)}`);
+        const { error, row } = await Database.querySingleAsync(connection, `SELECT id, slug, title, short, content, network, example, timestamp FROM articles WHERE slug = ${connection.escape(slug)}`);
         
         connection.destroy();
         
