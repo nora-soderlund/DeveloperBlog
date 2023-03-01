@@ -58,6 +58,8 @@ article {
     }
 
     iframe {
+        background: lighten($background, 5%);
+
         display: flex;
 
         align-self: center;
