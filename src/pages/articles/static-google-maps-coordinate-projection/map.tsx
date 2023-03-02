@@ -150,7 +150,7 @@ export default class MapPage extends Component<{}, MapPageState> {
         
         return (
             <div className={`${roboto.className} ${style.map}`}>
-                 <a href="https://www.google.com/maps/..." onClick={(event) => this.onMapClick(event)}>
+                 <a href="https://www.google.com/maps/search/?api=1&map_action=map&query..." onClick={(event) => this.onMapClick(event)}>
                     <canvas ref={this.canvas} width={this.state.image?.size[0]} height={this.state.image?.size[1]}/>
                 </a>
             </div>
