@@ -13,7 +13,10 @@ export default async function handler(request: NextApiRequest, response: NextApi
     if(article === null)
         return response.status(400).json(null);
 
-    const feedback: boolean | null = await Articles.getArticleFeedback(article, request.headers["x-proxy-connecting-ip"] as string);
+    const forwarded = request.headers["x-forwarded-for"];
+    const ip = typeof forwarded === "string" ? forwarded.split(/, /)[0] : request.socket.remoteAddress as string;
+
+    const feedback: boolean | null = await Articles.getArticleFeedback(article, ip);
 
     response.status(200).json({
         article,

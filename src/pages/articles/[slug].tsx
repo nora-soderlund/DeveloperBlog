@@ -145,8 +145,8 @@ export default withRouter(ArticlePage);
 export async function getServerSideProps({ req, query }: any) {
     const Articles = (await import("Services/Database/Articles")).default;
     
-    const forwarded = req.headers['x-forwarded-for'];
-    const ip = typeof forwarded === 'string' ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
+    const forwarded = req.headers["x-forwarded-for"];
+    const ip = typeof forwarded === "string" ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
 
     Articles.addArticleRequest(query.slug as string, ip);
 
