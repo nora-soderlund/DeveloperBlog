@@ -5,6 +5,14 @@ import Tags from "./Tags";
 import { Article, ArticleMeta, ArticleTag, ArticleSlugs, Tag } from "../../Types";
 
 export default class Articles {
+    static async addArticleRequest(slug: string, remoteAddress: string): Promise<void> {
+        const connection = await Database.ensureConnectionAsync();
+
+        await Database.querySingleAsync(connection, `INSERT INTO article_requests (article, address, timestamp) VALUES (${connection.escape(slug)}, ${connection.escape(remoteAddress)}, ${connection.escape(Date.now())})`);
+        
+        connection.destroy();
+    };
+
     static async getArticleBySlug(slug: string): Promise<Article | null> {
         const connection = await Database.ensureConnectionAsync();
 

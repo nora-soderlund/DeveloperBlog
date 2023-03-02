@@ -142,8 +142,14 @@ class ArticlePage extends Component<ArticlePageProps, ArticlePageState> {
 
 export default withRouter(ArticlePage);
 
-export async function getServerSideProps({ query }: any) {
+export async function getServerSideProps({ req, query }: any) {
     const Articles = (await import("Services/Database/Articles")).default;
+    
+    const forwarded = req.headers['x-forwarded-for'];
+    const ip = typeof forwarded === 'string' ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
+
+    Articles.addArticleRequest(query.slug as string, ip);
+
     const articleMeta: ArticleMeta | null = await Articles.getArticleMetaBySlug(query.slug as string);
 
     if(articleMeta === null) {
