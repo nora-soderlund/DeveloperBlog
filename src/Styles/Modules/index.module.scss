@@ -41,7 +41,7 @@
             .image {
                 width: 1.2em;
                 height: 1.2em;
-    
+
                 overflow: hidden;
     
                 img {
@@ -53,9 +53,11 @@
             .name {
                 margin-block: 0;
 
-                font-size: .8em;
+                font-size: .7em;
 
                 white-space: nowrap;
+
+                text-overflow: ellipsis;
             }
         }
 
